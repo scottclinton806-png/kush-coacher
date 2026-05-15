@@ -284,7 +284,7 @@ export default function KushCoacher() {
                       fontFamily: "Georgia, serif", fontSize: 12,
                       cursor: "pointer", transition: "all 0.15s",
                     }}>
-                    {w.flush ? `Wk ${i - 7} 💧` : `Wk ${i + 1}`}
+                    {(w as any).flush ? `Wk ${i - 7} 💧` : `Wk ${i + 1}`}
                   </button>
                   <button onClick={() => openNotes(w.week)}
                     title="Grow Notes"
