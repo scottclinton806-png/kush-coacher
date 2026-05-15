@@ -168,7 +168,7 @@ export default function KushCoacher() {
   const [saved, setSaved] = useState(false);
   const [showMixing, setShowMixing] = useState(false);
   const [showLog, setShowLog] = useState(false);
-  const [growNotes, setGrowNotes] = useState({});
+  const [growNotes, setGrowNotes] = useState<Record<string, string>>({});
   const [activeNotesKey, setActiveNotesKey] = useState<string | null>(null);
   const [noteInput, setNoteInput] = useState("");
   const [noteSaved, setNoteSaved] = useState(false);
