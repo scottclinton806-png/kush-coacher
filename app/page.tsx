@@ -321,7 +321,7 @@ export default function KushCoacher() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
-            {currentWeek.flush && (
+            {(currentWeek as any).flush && (
               <div style={{
                 background: "#111", border: "1px solid #333", borderRadius: 8,
                 padding: "5px 12px", fontSize: 12, color: "#888",
