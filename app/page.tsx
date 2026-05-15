@@ -164,7 +164,7 @@ export default function KushCoacher() {
   const [gallons, setGallons] = useState("");
   const [ph, setPh] = useState("");
   const [ppm, setPpm] = useState("");
-  const [logEntries, setLogEntries] = useState([]);
+  const [logEntries, setLogEntries] = useState<any[]>([]);
   const [saved, setSaved] = useState(false);
   const [showMixing, setShowMixing] = useState(false);
   const [showLog, setShowLog] = useState(false);
