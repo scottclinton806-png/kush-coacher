@@ -365,7 +365,7 @@ export default function KushCoacher() {
         </div>
 
         {/* NUTRIENT LIST */}
-        {!(currentWeek as any).flush && (
+        {!(currentWeek as any).flush ? (
           <div style={{
             background: "#111", border: "1px solid #1e1e1e",
             borderRadius: 14, overflow: "hidden", marginBottom: 20,
