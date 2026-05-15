@@ -504,7 +504,7 @@ export default function KushCoacher() {
           <button onClick={handleLog}
             style={{
               width: "100%", padding: "13px", borderRadius: 10,
-              border: "none",
+              
               background: saved ? "#1a3a1a" : phaseDark,
               color: saved ? "#4ade80" : phaseColor,
               fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold",
