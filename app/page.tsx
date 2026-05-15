@@ -179,7 +179,7 @@ export default function KushCoacher() {
   const phaseColor = phase === "veg" ? "#4ade80" : "#fb923c";
   const phaseDark = phase === "veg" ? "#052e16" : "#1c0700";
 
-  function calcDose(dose) {
+  function calcDose(dose: number) {
     if (!gal || !dose) return null;
     return (dose * gal).toFixed(2);
   }
