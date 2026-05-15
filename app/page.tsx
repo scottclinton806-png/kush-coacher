@@ -1,65 +1,623 @@
-import Image from "next/image";
+import { useState } from "react";
 
-export default function Home() {
+const VEG_SCHEDULE = [
+  {
+    week: "Veg Week 1", targetEC: "1.0–1.5", pH: "5.8–5.9",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 0, skip: true },
+      { name: "Base Nutrients", unit: "g/gal", dose: 1.5 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 0.5 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 1 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1 },
+      { name: "SuperThrive", unit: "mL/gal", dose: 1.25 },
+    ]
+  },
+  {
+    week: "Veg Week 2", targetEC: "1.8–2.0", pH: "5.8–5.9",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 1 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1 },
+      { name: "SuperThrive", unit: "mL/gal", dose: 1.25 },
+    ]
+  },
+  {
+    week: "Veg Week 3", targetEC: "1.8–2.0", pH: "5.8–5.9",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1 },
+      { name: "SuperThrive", unit: "mL/gal", dose: 1.25 },
+    ]
+  },
+  {
+    week: "Veg Week 4", targetEC: "1.8–2.0", pH: "5.8–5.9",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3.6 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1.1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.4 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1 },
+      { name: "SuperThrive", unit: "mL/gal", dose: 1.25 },
+    ]
+  },
+];
+
+const FLOWER_SCHEDULE = [
+  {
+    week: "Flower Week 1", targetEC: "1.5–1.8", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2.5 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 2 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 2 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.5 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 1.2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 10 },
+    ]
+  },
+  {
+    week: "Flower Week 2", targetEC: "1.5–1.8", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2.5 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 2 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 2 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.5 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 1.2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 10 },
+    ]
+  },
+  {
+    week: "Flower Week 3", targetEC: "1.8", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2.5 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3.6 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1.1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.4 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 0, skip: true },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 10 },
+    ]
+  },
+  {
+    week: "Flower Week 4", targetEC: "1.8", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2.5 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3.6 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1.1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.4 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 0, skip: true },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 10 },
+    ]
+  },
+  {
+    week: "Flower Week 5", targetEC: "1.8", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 2.5 },
+      { name: "Base Nutrients", unit: "g/gal", dose: 3.6 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 1.1 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.4 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 0, skip: true },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 10 },
+    ]
+  },
+  {
+    week: "Flower Week 6", targetEC: "2.2–2.5", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 0, skip: true },
+      { name: "Base Nutrients", unit: "g/gal", dose: 2 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 2 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.5 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 1.2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 20 },
+    ]
+  },
+  {
+    week: "Flower Week 7", targetEC: "2.2–2.5", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 0, skip: true },
+      { name: "Base Nutrients", unit: "g/gal", dose: 2 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 2 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.5 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 1.2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 20 },
+    ]
+  },
+  {
+    week: "Flower Week 8", targetEC: "2.2–2.5", pH: "5.9–6.1",
+    nutrients: [
+      { name: "SI", unit: "mL/gal", dose: 0, skip: true },
+      { name: "Base Nutrients", unit: "g/gal", dose: 2 },
+      { name: "Epsom Salt", unit: "g/gal", dose: 2 },
+      { name: "Cal-Nit (15-0-0)", unit: "g/gal", dose: 2.5 },
+      { name: "MKP PK Booster", unit: "g/gal", dose: 1.2 },
+      { name: "Beneficial Microbes", unit: "mL/gal", dose: 1.5 },
+      { name: "Humic Acid", unit: "mL/gal", dose: 20 },
+    ]
+  },
+  { week: "Flower Week 9", targetEC: "0", pH: "6.1–6.3", flush: true, nutrients: [] },
+  { week: "Flower Week 10", targetEC: "0", pH: "6.1–6.3", flush: true, nutrients: [] },
+];
+
+const MIXING_ORDER = [
+  { step: "1", label: "SI", note: "Add FIRST — pH water to 7.5–8.0 before adding anything else" },
+  { step: "2", label: "Base Nutrients", note: "Add 2nd — mix until fully dissolved" },
+  { step: "3", label: "Epsom Salt", note: "Add 3rd — mix until dissolved, then PAUSE 5–10 min" },
+  { step: "4", label: "Cal-Nit (15-0-0)", note: "Add last — mix until dissolved" },
+  { step: "5", label: "Humic Acid", note: "Flower only — add very last" },
+  { step: "6", label: "Check pH & EC/PPM", note: "Final pH should read 6.1–6.3. Add RO water if needed." },
+];
+
+export default function KushCoacher() {
+  const [phase, setPhase] = useState("veg");
+  const [weekIndex, setWeekIndex] = useState(0);
+  const [gallons, setGallons] = useState("");
+  const [ph, setPh] = useState("");
+  const [ppm, setPpm] = useState("");
+  const [logEntries, setLogEntries] = useState([]);
+  const [saved, setSaved] = useState(false);
+  const [showMixing, setShowMixing] = useState(false);
+  const [showLog, setShowLog] = useState(false);
+  const [growNotes, setGrowNotes] = useState({});
+  const [activeNotesKey, setActiveNotesKey] = useState(null);
+  const [noteInput, setNoteInput] = useState("");
+  const [noteSaved, setNoteSaved] = useState(false);
+
+  const schedule = phase === "veg" ? VEG_SCHEDULE : FLOWER_SCHEDULE;
+  const currentWeek = schedule[weekIndex];
+  const gal = parseFloat(gallons) || 0;
+  const phaseColor = phase === "veg" ? "#4ade80" : "#fb923c";
+  const phaseDark = phase === "veg" ? "#052e16" : "#1c0700";
+
+  function calcDose(dose) {
+    if (!gal || !dose) return null;
+    return (dose * gal).toFixed(2);
+  }
+
+  function openNotes(weekLabel) {
+    const key = weekLabel;
+    setActiveNotesKey(key);
+    setNoteInput(growNotes[key] || "");
+    setNoteSaved(false);
+  }
+
+  function saveNote() {
+    if (!activeNotesKey) return;
+    setGrowNotes(prev => ({ ...prev, [activeNotesKey]: noteInput }));
+    setNoteSaved(true);
+    setTimeout(() => setNoteSaved(false), 2000);
+  }
+
+  function handleLog() {
+    if (!gallons) return;
+    const entry = {
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      phase,
+      week: currentWeek.week,
+      gallons,
+      ph: ph || "—",
+      ppm: ppm || "—",
+    };
+    setLogEntries(prev => [entry, ...prev]);
+    setPh("");
+    setPpm("");
+    setSaved(true);
+    setTimeout(() => setSaved(false), 2500);
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div style={{
+      minHeight: "100vh",
+      background: "#080808",
+      fontFamily: "'Georgia', serif",
+      color: "#e4ddd0",
+    }}>
+
+      {/* HEADER */}
+      <div style={{
+        background: "linear-gradient(160deg, #0f1a0f 0%, #1a0f1a 100%)",
+        borderBottom: "1px solid #1f1f1f",
+        padding: "28px 20px 18px",
+        textAlign: "center",
+        position: "relative",
+      }}>
+        <div style={{ fontSize: 10, letterSpacing: 7, color: "#555", marginBottom: 4, textTransform: "uppercase" }}>
+          by MushLuvv
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+        <div style={{ fontSize: 30, fontWeight: "bold", color: "#e4ddd0", letterSpacing: 1 }}>
+          Kush Coacher 🌿
+        </div>
+        <div style={{ fontSize: 12, color: "#666", marginTop: 5 }}>
+          Expert chart by Clinton
+        </div>
+      </div>
+
+      <div style={{ maxWidth: 580, margin: "0 auto", padding: "20px 16px 60px" }}>
+
+        {/* PHASE TOGGLE */}
+        <div style={{ display: "flex", gap: 10, marginBottom: 22 }}>
+          {[
+            { id: "veg", label: "🌱 Veg", color: "#4ade80", dark: "#052e16" },
+            { id: "flower", label: "🌸 Flower", color: "#fb923c", dark: "#1c0700" },
+          ].map(p => (
+            <button key={p.id} onClick={() => { setPhase(p.id); setWeekIndex(0); }}
+              style={{
+                flex: 1, padding: "13px 0", borderRadius: 12,
+                border: `2px solid ${phase === p.id ? p.color : "#222"}`,
+                background: phase === p.id ? p.dark : "#111",
+                color: phase === p.id ? p.color : "#555",
+                fontFamily: "Georgia, serif", fontSize: 15, fontWeight: "bold",
+                cursor: "pointer", transition: "all 0.2s", letterSpacing: 0.5,
+              }}>
+              {p.label}
+            </button>
+          ))}
+        </div>
+
+        {/* WEEK PILLS */}
+        <div style={{ marginBottom: 22 }}>
+          <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", marginBottom: 10, textTransform: "uppercase" }}>
+            Select Week
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+            {schedule.map((w, i) => {
+              const hasNote = !!growNotes[w.week];
+              return (
+                <div key={i} style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                  <button onClick={() => setWeekIndex(i)}
+                    style={{
+                      padding: "7px 14px", borderRadius: 20,
+                      border: `1px solid ${weekIndex === i ? phaseColor : "#222"}`,
+                      background: weekIndex === i ? phaseDark : "#111",
+                      color: weekIndex === i ? phaseColor : "#666",
+                      fontFamily: "Georgia, serif", fontSize: 12,
+                      cursor: "pointer", transition: "all 0.15s",
+                    }}>
+                    {w.flush ? `Wk ${i - 7} 💧` : `Wk ${i + 1}`}
+                  </button>
+                  <button onClick={() => openNotes(w.week)}
+                    title="Grow Notes"
+                    style={{
+                      padding: "5px 8px", borderRadius: 16,
+                      border: `1px solid ${hasNote ? "#7c6f2a" : "#222"}`,
+                      background: hasNote ? "#1a1700" : "#111",
+                      color: hasNote ? "#e2c94a" : "#444",
+                      fontSize: 11, cursor: "pointer", transition: "all 0.15s",
+                      fontFamily: "Georgia, serif",
+                    }}>
+                    {hasNote ? "📝" : "✏️"}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* WEEK INFO CARD */}
+        <div style={{
+          background: "#111", border: "1px solid #1e1e1e",
+          borderRadius: 14, padding: "16px 18px", marginBottom: 18,
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+        }}>
+          <div>
+            <div style={{ fontSize: 16, fontWeight: "bold", color: phaseColor, marginBottom: 6 }}>
+              {currentWeek.week}
+            </div>
+            <div style={{ fontSize: 12, color: "#666" }}>
+              Target EC: <span style={{ color: "#bbb" }}>{currentWeek.targetEC}</span>
+              &nbsp;&nbsp;·&nbsp;&nbsp;
+              pH: <span style={{ color: "#bbb" }}>{currentWeek.pH}</span>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
+            {currentWeek.flush && (
+              <div style={{
+                background: "#111", border: "1px solid #333", borderRadius: 8,
+                padding: "5px 12px", fontSize: 12, color: "#888",
+              }}>
+                FLUSH
+              </div>
+            )}
+            <button onClick={() => openNotes(currentWeek.week)}
+              style={{
+                padding: "7px 14px", borderRadius: 10,
+                border: `1px solid ${growNotes[currentWeek.week] ? "#7c6f2a" : phaseColor}`,
+                background: growNotes[currentWeek.week] ? "#1a1700" : phaseDark,
+                color: growNotes[currentWeek.week] ? "#e2c94a" : phaseColor,
+                fontFamily: "Georgia, serif", fontSize: 12, fontWeight: "bold",
+                cursor: "pointer", whiteSpace: "nowrap",
+              }}>
+              {growNotes[currentWeek.week] ? "📝 View Notes" : "📝 Grow Notes"}
+            </button>
+          </div>
+        </div>
+
+        {/* RESERVOIR INPUT */}
+        <div style={{ marginBottom: 20 }}>
+          <label style={{
+            fontSize: 10, letterSpacing: 4, color: "#555",
+            textTransform: "uppercase", display: "block", marginBottom: 8,
+          }}>
+            Reservoir Size (Gallons)
+          </label>
+          <input
+            type="number" min="0" step="0.5" placeholder="e.g. 10"
+            value={gallons}
+            onChange={e => setGallons(e.target.value)}
+            style={{
+              width: "100%", padding: "14px 16px", borderRadius: 12,
+              border: "1px solid #222", background: "#111",
+              color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 17,
+              outline: "none", boxSizing: "border-box",
+            }}
+          />
+        </div>
+
+        {/* NUTRIENT LIST */}
+        {!currentWeek.flush ? (
+          <div style={{
+            background: "#111", border: "1px solid #1e1e1e",
+            borderRadius: 14, overflow: "hidden", marginBottom: 20,
+          }}>
+            <div style={{
+              padding: "12px 18px", borderBottom: "1px solid #1a1a1a",
+              fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase",
+            }}>
+              Base Nutes to Add
+            </div>
+            {currentWeek.nutrients.filter(n => !n.skip).map((n, i) => {
+              const total = calcDose(n.dose);
+              const isLast = i === currentWeek.nutrients.filter(n => !n.skip).length - 1;
+              return (
+                <div key={i} style={{
+                  display: "flex", justifyContent: "space-between", alignItems: "center",
+                  padding: "14px 18px",
+                  borderBottom: isLast ? "none" : "1px solid #161616",
+                }}>
+                  <div>
+                    <div style={{ fontSize: 14, color: "#ddd" }}>{n.name}</div>
+                    <div style={{ fontSize: 11, color: "#444", marginTop: 2 }}>
+                      {n.dose} {n.unit}
+                    </div>
+                  </div>
+                  <div style={{ textAlign: "right" }}>
+                    {total ? (
+                      <>
+                        <div style={{ fontSize: 20, fontWeight: "bold", color: phaseColor }}>
+                          {total}
+                        </div>
+                        <div style={{ fontSize: 11, color: "#555" }}>
+                          {n.unit.replace("/gal", "")}
+                        </div>
+                      </>
+                    ) : (
+                      <div style={{ fontSize: 12, color: "#333" }}>enter gallons ↑</div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={{
+            background: "#0a0f1a", border: "1px solid #1a2030",
+            borderRadius: 14, padding: "28px 20px", marginBottom: 20, textAlign: "center",
+          }}>
+            <div style={{ fontSize: 36, marginBottom: 10 }}>💧</div>
+            <div style={{ fontSize: 16, color: "#8899aa" }}>Flush week — plain RO water only</div>
+            <div style={{ fontSize: 12, color: "#445566", marginTop: 6 }}>
+              Target pH: {currentWeek.pH}
+            </div>
+          </div>
+        )}
+
+        {/* MIXING ORDER TOGGLE */}
+        <button onClick={() => setShowMixing(v => !v)}
+          style={{
+            width: "100%", padding: "13px", borderRadius: 12,
+            border: "1px solid #222", background: showMixing ? "#161616" : "#111",
+            color: "#888", fontFamily: "Georgia, serif", fontSize: 13,
+            cursor: "pointer", marginBottom: showMixing ? 0 : 20,
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+          }}>
+          <span>📋 Mixing Order & Instructions</span>
+          <span style={{ fontSize: 18 }}>{showMixing ? "▲" : "▼"}</span>
+        </button>
+
+        {showMixing && (
+          <div style={{
+            background: "#0e0e0e", border: "1px solid #1e1e1e", borderTop: "none",
+            borderRadius: "0 0 12px 12px", padding: "4px 0 8px", marginBottom: 20,
+          }}>
+            {MIXING_ORDER.map((m, i) => (
+              <div key={i} style={{
+                display: "flex", gap: 12, padding: "12px 18px",
+                borderBottom: i < MIXING_ORDER.length - 1 ? "1px solid #161616" : "none",
+              }}>
+                <div style={{
+                  width: 26, height: 26, borderRadius: "50%",
+                  background: phaseDark, border: `1px solid ${phaseColor}`,
+                  color: phaseColor, fontSize: 11, fontWeight: "bold",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  flexShrink: 0, marginTop: 1,
+                }}>
+                  {m.step}
+                </div>
+                <div>
+                  <div style={{ fontSize: 13, color: "#ccc", marginBottom: 2 }}>{m.label}</div>
+                  <div style={{ fontSize: 11, color: "#555" }}>{m.note}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* pH & PPM LOG */}
+        <div style={{
+          background: "#111", border: "1px solid #1e1e1e",
+          borderRadius: 14, padding: "16px 18px", marginBottom: 20,
+        }}>
+          <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase", marginBottom: 14 }}>
+            Log pH & PPM After Mixing
+          </div>
+          <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: 11, color: "#555", display: "block", marginBottom: 5 }}>pH Reading</label>
+              <input
+                type="number" step="0.1" placeholder="e.g. 6.0"
+                value={ph}
+                onChange={e => setPh(e.target.value)}
+                style={{
+                  width: "100%", padding: "11px 12px", borderRadius: 10,
+                  border: "1px solid #222", background: "#0a0a0a",
+                  color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 15,
+                  outline: "none", boxSizing: "border-box",
+                }}
+              />
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ fontSize: 11, color: "#555", display: "block", marginBottom: 5 }}>PPM Reading</label>
+              <input
+                type="number" placeholder="e.g. 850"
+                value={ppm}
+                onChange={e => setPpm(e.target.value)}
+                style={{
+                  width: "100%", padding: "11px 12px", borderRadius: 10,
+                  border: "1px solid #222", background: "#0a0a0a",
+                  color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 15,
+                  outline: "none", boxSizing: "border-box",
+                }}
+              />
+            </div>
+          </div>
+          <button onClick={handleLog}
+            style={{
+              width: "100%", padding: "13px", borderRadius: 10,
+              border: "none",
+              background: saved ? "#1a3a1a" : phaseDark,
+              color: saved ? "#4ade80" : phaseColor,
+              fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold",
+              cursor: "pointer", transition: "all 0.3s",
+              border: `1px solid ${saved ? "#4ade80" : phaseColor}`,
+            }}>
+            {saved ? "✓ Saved to Log" : "Save to Log"}
+          </button>
+        </div>
+
+        {/* LOG HISTORY */}
+        {logEntries.length > 0 && (
+          <>
+            <button onClick={() => setShowLog(v => !v)}
+              style={{
+                width: "100%", padding: "13px", borderRadius: 12,
+                border: "1px solid #222", background: "#111",
+                color: "#888", fontFamily: "Georgia, serif", fontSize: 13,
+                cursor: "pointer", marginBottom: showLog ? 0 : 0,
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+              }}>
+              <span>📓 Mix Log ({logEntries.length} {logEntries.length === 1 ? "entry" : "entries"})</span>
+              <span style={{ fontSize: 18 }}>{showLog ? "▲" : "▼"}</span>
+            </button>
+
+            {showLog && (
+              <div style={{
+                background: "#0e0e0e", border: "1px solid #1e1e1e", borderTop: "none",
+                borderRadius: "0 0 12px 12px", overflow: "hidden",
+              }}>
+                {logEntries.map((e, i) => (
+                  <div key={e.id} style={{
+                    padding: "12px 18px",
+                    borderBottom: i < logEntries.length - 1 ? "1px solid #161616" : "none",
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                  }}>
+                    <div>
+                      <div style={{ fontSize: 13, color: "#ccc" }}>{e.week}</div>
+                      <div style={{ fontSize: 11, color: "#555", marginTop: 2 }}>
+                        {e.date} · {e.gallons} gal
+                      </div>
+                    </div>
+                    <div style={{ textAlign: "right" }}>
+                      <div style={{ fontSize: 12, color: "#888" }}>pH <span style={{ color: "#bbb" }}>{e.ph}</span></div>
+                      <div style={{ fontSize: 12, color: "#888" }}>PPM <span style={{ color: "#bbb" }}>{e.ppm}</span></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+      </div>
+
+      {/* GROW NOTES MODAL */}
+      {activeNotesKey && (
+        <div
+          onClick={e => { if (e.target === e.currentTarget) setActiveNotesKey(null); }}
+          style={{
+            position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)",
+            display: "flex", alignItems: "flex-end", justifyContent: "center",
+            zIndex: 100,
+          }}>
+          <div style={{
+            background: "#141414", border: "1px solid #2a2a2a",
+            borderRadius: "20px 20px 0 0", padding: "24px 20px 40px",
+            width: "100%", maxWidth: 580,
+          }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+              <div>
+                <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase", marginBottom: 4 }}>
+                  Grow Notes
+                </div>
+                <div style={{ fontSize: 16, fontWeight: "bold", color: phaseColor }}>
+                  {activeNotesKey}
+                </div>
+              </div>
+              <button onClick={() => setActiveNotesKey(null)}
+                style={{
+                  background: "#222", border: "none", borderRadius: "50%",
+                  width: 34, height: 34, color: "#888", fontSize: 20,
+                  cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                ×
+              </button>
+            </div>
+            <textarea
+              placeholder="How are the plants looking? Any issues, observations, or things to remember this week..."
+              value={noteInput}
+              onChange={e => setNoteInput(e.target.value)}
+              rows={6}
+              style={{
+                width: "100%", padding: "14px", borderRadius: 12,
+                border: "1px solid #2a2a2a", background: "#0e0e0e",
+                color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14,
+                outline: "none", resize: "none", boxSizing: "border-box", lineHeight: 1.6,
+              }}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <button onClick={saveNote}
+              style={{
+                width: "100%", marginTop: 12, padding: "14px",
+                borderRadius: 12, border: `1px solid ${noteSaved ? "#4ade80" : phaseColor}`,
+                background: noteSaved ? "#052e16" : phaseDark,
+                color: noteSaved ? "#4ade80" : phaseColor,
+                fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold",
+                cursor: "pointer", transition: "all 0.3s",
+              }}>
+              {noteSaved ? "✓ Note Saved" : "Save Note"}
+            </button>
+          </div>
         </div>
-      </main>
+      )}
+
     </div>
   );
 }
