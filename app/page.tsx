@@ -184,7 +184,7 @@ export default function KushCoacher() {
     return (dose * gal).toFixed(2);
   }
 
-  function openNotes(weekLabel) {
+  function openNotes(weekLabel: string) {
     const key = weekLabel;
     setActiveNotesKey(key);
     setNoteInput(growNotes[key] || "");
