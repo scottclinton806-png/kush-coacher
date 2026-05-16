@@ -193,7 +193,7 @@ export default function KushCoacher() {
     setUnitOverrides(prev => ({ ...prev, [key]: current === "g" ? "mL" : "g" }));
   }
 
-  function getMyAmount(nutrientName) {
+  function getMyAmount(nutrientName: string) {
     return myAmounts[`${currentWeek.week}-${nutrientName}`] || "";
   }
 
