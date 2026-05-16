@@ -182,12 +182,12 @@ export default function KushCoacher() {
   const phaseColor = phase === "veg" ? "#4ade80" : "#fb923c";
   const phaseDark = phase === "veg" ? "#052e16" : "#1c0700";
 
-  function getUnit(nutrient) {
+  function getUnit(nutrient: any) {
     const key = `${currentWeek.week}-${nutrient.name}`;
     return unitOverrides[key] || nutrient.defaultUnit;
   }
 
-  function toggleUnit(nutrient) {
+  function toggleUnit(nutrient: any) {
     const key = `${currentWeek.week}-${nutrient.name}`;
     const current = getUnit(nutrient);
     setUnitOverrides(prev => ({ ...prev, [key]: current === "g" ? "mL" : "g" }));
