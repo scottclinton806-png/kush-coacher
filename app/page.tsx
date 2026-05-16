@@ -174,7 +174,7 @@ export default function KushCoacher() {
   const [noteInput, setNoteInput] = useState("");
   const [noteSaved, setNoteSaved] = useState(false);
   const [unitOverrides, setUnitOverrides] = useState<Record<string, string>>({});
-  const [myAmounts, setMyAmounts] = useState<Recrd<string, string>>({});
+  const [myAmounts, setMyAmounts] = useState<Record<string, string>>({});
 
   const schedule = phase === "veg" ? VEG_SCHEDULE : FLOWER_SCHEDULE;
   const currentWeek = schedule[weekIndex];
