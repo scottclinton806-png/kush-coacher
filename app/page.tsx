@@ -173,7 +173,7 @@ export default function KushCoacher() {
   const [activeNotesKey, setActiveNotesKey] = useState(null);
   const [noteInput, setNoteInput] = useState("");
   const [noteSaved, setNoteSaved] = useState(false);
-  const [unitOverrides, setUnitOverrides] = useState({});
+  const [unitOverrides, setUnitOverrides] = useState<Record<string,string>>({});
   const [myAmounts, setMyAmounts] = useState({});
 
   const schedule = phase === "veg" ? VEG_SCHEDULE : FLOWER_SCHEDULE;
