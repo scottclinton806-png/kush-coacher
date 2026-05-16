@@ -206,7 +206,7 @@ export default function KushCoacher() {
     return (dose * gal).toFixed(2);
   }
 
-  function getDiff(recommended, myAmt) {
+  function getDiff(recommended: string, myAmt: string) {
     if (!recommended || !myAmt) return null;
     const diff = parseFloat(myAmt) - parseFloat(recommended);
     if (isNaN(diff)) return null;
