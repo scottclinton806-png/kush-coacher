@@ -327,7 +327,7 @@ export default function KushCoacher() {
               const unit = getUnit(n);
               const recommended = calcDose(n.dose);
               const myAmt = getMyAmount(n.name);
-              const diff = getDiff(recommended, myAmt);
+              const diff = getDiff(recommended || "", myAmt);
               return (
                 <div key={i} style={{ padding: "14px 18px", borderBottom: i < arr.length - 1 ? "1px solid #161616" : "none" }}>
                   {/* Name + toggle */}
