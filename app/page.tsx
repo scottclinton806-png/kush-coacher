@@ -323,7 +323,7 @@ export default function KushCoacher() {
               <div style={{ textAlign: "center" }}>Your Amount</div>
             </div>
 
-            {currentWeek.nutrients.filter(n => !n.skip).map((n, i, arr) => {
+            {currentWeek.nutrients.filter((n: any) => !n.skip).map((n, i, arr) => {
               const unit = getUnit(n);
               const recommended = calcDose(n.dose);
               const myAmt = getMyAmount(n.name);
