@@ -314,7 +314,7 @@ export default function KushCoacher() {
         </div>
 
         {/* NUTRIENT TABLE */}
-        {!currentWeek as any).flush ? (
+        {!(currentWeek as any).flush ? (
           <div style={{ background: "#111", border: "1px solid #1e1e1e", borderRadius: 14, overflow: "hidden", marginBottom: 20 }}>
             {/* Header row */}
             <div style={{ display: "grid", gridTemplateColumns: "1fr 88px 88px", padding: "10px 18px", borderBottom: "1px solid #1a1a1a", fontSize: 9, letterSpacing: 3, color: "#444", textTransform: "uppercase" }}>
