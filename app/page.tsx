@@ -173,8 +173,8 @@ export default function KushCoacher() {
   const [activeNotesKey, setActiveNotesKey] = useState(null);
   const [noteInput, setNoteInput] = useState("");
   const [noteSaved, setNoteSaved] = useState(false);
-  const [unitOverrides, setUnitOverrides] = useState<Record<string,string>>({});
-  const [myAmounts, setMyAmounts] = useState<Record<string, string>>({});
+  const [unitOverrides, setUnitOverrides] = useState({});
+  const [myAmounts, setMyAmounts] = useState({});
 
   const schedule = phase === "veg" ? VEG_SCHEDULE : FLOWER_SCHEDULE;
   const currentWeek = schedule[weekIndex];
@@ -193,15 +193,15 @@ export default function KushCoacher() {
     setUnitOverrides(prev => ({ ...prev, [key]: current === "g" ? "mL" : "g" }));
   }
 
-  function getMyAmount(nutrientName: string) {
+  function getMyAmount(nutrientName) {
     return myAmounts[`${currentWeek.week}-${nutrientName}`] || "";
   }
 
-  function setMyAmount(nutrientName: string, val: string) {
+  function setMyAmount(nutrientName, val) {
     setMyAmounts(prev => ({ ...prev, [`${currentWeek.week}-${nutrientName}`]: val }));
   }
 
-  function calcDose(dose: number) {
+  function calcDose(dose) {
     if (!gal || !dose) return null;
     return (dose * gal).toFixed(2);
   }
