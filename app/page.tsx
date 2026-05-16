@@ -215,7 +215,7 @@ export default function KushCoacher() {
     return { label: `${diff.toFixed(2)} under`, color: "#60a5fa" };
   }
 
-  function openNotes(weekLabel: srting) {
+  function openNotes(weekLabel: string) {
     setActiveNotesKey(weekLabel);
     setNoteInput(growNotes[weekLabel] || "");
     setNoteSaved(false);
