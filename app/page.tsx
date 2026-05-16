@@ -298,7 +298,7 @@ export default function KushCoacher() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
-            {currentWeek.flush && <div style={{ background: "#111", border: "1px solid #333", borderRadius: 8, padding: "5px 12px", fontSize: 12, color: "#888" }}>FLUSH</div>}
+            {(currentWeek as any).flush && <div style={{ background: "#111", border: "1px solid #333", borderRadius: 8, padding: "5px 12px", fontSize: 12, color: "#888" }}>FLUSH</div>}
             <button onClick={() => openNotes(currentWeek.week)}
               style={{ padding: "7px 14px", borderRadius: 10, border: `1px solid ${growNotes[currentWeek.week] ? "#7c6f2a" : phaseColor}`, background: growNotes[currentWeek.week] ? "#1a1700" : phaseDark, color: growNotes[currentWeek.week] ? "#e2c94a" : phaseColor, fontFamily: "Georgia, serif", fontSize: 12, fontWeight: "bold", cursor: "pointer" }}>
               {growNotes[currentWeek.week] ? "📝 View Notes" : "📝 Grow Notes"}
