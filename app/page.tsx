@@ -241,7 +241,7 @@ export default function KushCoacher() {
     setTimeout(() => setSaved(false), 2500);
   }
 
-  const inputStyle = {
+  const inputStyle: React.CSSProperties = {
     width: "100%", padding: "11px 12px", borderRadius: 10,
     border: "1px solid #222", background: "#0a0a0a",
     color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 15,
