@@ -201,7 +201,7 @@ export default function KushCoacher() {
     setMyAmounts(prev => ({ ...prev, [`${currentWeek.week}-${nutrientName}`]: val }));
   }
 
-  function calcDose(dose) {
+  function calcDose(dose: number) {
     if (!gal || !dose) return null;
     return (dose * gal).toFixed(2);
   }
