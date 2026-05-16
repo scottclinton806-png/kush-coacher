@@ -278,7 +278,7 @@ export default function KushCoacher() {
               <div key={i} style={{ display: "flex", gap: 4, alignItems: "center" }}>
                 <button onClick={() => setWeekIndex(i)}
                   style={{ padding: "7px 14px", borderRadius: 20, border: `1px solid ${weekIndex === i ? phaseColor : "#222"}`, background: weekIndex === i ? phaseDark : "#111", color: weekIndex === i ? phaseColor : "#666", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer" }}>
-                  {w.flush ? `Wk ${i - 7} 💧` : `Wk ${i + 1}`}
+                  {(w as any).flush ? `Wk ${i - 7} 💧` : `Wk ${i + 1}`}
                 </button>
                 <button onClick={() => openNotes(w.week)}
                   style={{ padding: "5px 8px", borderRadius: 16, border: `1px solid ${growNotes[w.week] ? "#7c6f2a" : "#222"}`, background: growNotes[w.week] ? "#1a1700" : "#111", color: growNotes[w.week] ? "#e2c94a" : "#444", fontSize: 11, cursor: "pointer", fontFamily: "Georgia, serif" }}>
