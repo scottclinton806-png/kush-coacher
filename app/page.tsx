@@ -197,7 +197,7 @@ export default function KushCoacher() {
     return myAmounts[`${currentWeek.week}-${nutrientName}`] || "";
   }
 
-  function setMyAmount(nutrientName, val) {
+  function setMyAmount(nutrientName: string, val: string) {
     setMyAmounts(prev => ({ ...prev, [`${currentWeek.week}-${nutrientName}`]: val }));
   }
 
