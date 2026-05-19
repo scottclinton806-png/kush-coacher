@@ -708,7 +708,7 @@ export default function KushCoacher() {
               <button
                 onClick={sendMessage}
                 disabled={chatLoading || !chatInput.trim()}
-                style={{ padding: "12px 16px", borderRadius: 12, border: "none", background: chatLoading || !chatInput.trim() ? "#1a1a1a" : "#052e16", color: chatLoading || !chatInput.trim() ? "#444" : "#4ade80", fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: chatLoading || !chatInput.trim() ? "default" : "pointer", border: `1px solid ${chatLoading || !chatInput.trim() ? "#222" : "#4ade80"}` }}
+                style={{ padding: "12px 16px", borderRadius: 12, border: "none", background: chatLoading || !chatInput.trim() ? "333" : "#22c55e", color: "#fff", #444" : "#4ade80", fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: chatLoading || !chatInput.trim() ? "default" : "pointer", border: `1px solid ${chatLoading || !chatInput.trim() ? "#222" : "#4ade80"}` }}
               >
                 Send
               </button>
