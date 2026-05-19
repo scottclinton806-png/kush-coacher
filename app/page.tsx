@@ -19,6 +19,21 @@ interface WeekSchedule {
   nutrients: Nutrient[];
 }
 
+interface LogEntry {
+  id: number;
+  date: string;
+  phase: string;
+  week: string;
+  gallons: string;
+  ph: string;
+  ppm: string;
+}
+
+interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
 const VEG_SCHEDULE: WeekSchedule[] = [
   {
     week: "Veg Week 1", targetPPM: "500–750", pH: "5.8–5.9",
@@ -75,6 +90,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Epsom Salt", defaultUnit: "g", dose: 2.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 2.5 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 10 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 10 },
     ]
@@ -87,6 +103,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Epsom Salt", defaultUnit: "g", dose: 2.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 2.5 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 10 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 10 },
     ]
@@ -98,6 +115,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g", dose: 3.6, toggleable: true },
       { name: "Epsom Salt", defaultUnit: "g", dose: 3.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 2.5 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 10 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 10 },
     ]
@@ -110,6 +128,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Epsom Salt", defaultUnit: "g", dose: 3.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 2.5 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 10 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 10 },
     ]
@@ -122,6 +141,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Epsom Salt", defaultUnit: "g", dose: 3.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 1.5 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 15 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 10 },
     ]
@@ -134,6 +154,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Epsom Salt", defaultUnit: "g", dose: 3.5 },
       { name: "Cal-Nit (15-0-0)", defaultUnit: "g", dose: 1 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 15 },
       { name: "Shooting Powder", defaultUnit: "g", dose: 2.6 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 20 },
@@ -145,6 +166,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g", dose: 2, toggleable: true },
       { name: "Epsom Salt", defaultUnit: "g", dose: 1 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 20 },
       { name: "Shooting Powder", defaultUnit: "g", dose: 2.6 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 20 },
@@ -156,6 +178,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g", dose: 2, toggleable: true },
       { name: "Epsom Salt", defaultUnit: "g", dose: 1 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 20, note: "20–30 mL/gal" },
       { name: "Shooting Powder", defaultUnit: "g", dose: 5.2 },
       { name: "Great White", defaultUnit: "tsp", dose: 0.1, note: "1 heaping tsp per 10 gal" },
       { name: "Ful-Power", defaultUnit: "mL", dose: 20 },
@@ -167,6 +190,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g", dose: 2, toggleable: true },
       { name: "Epsom Salt", defaultUnit: "g", dose: 1 },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5 },
+      { name: "Sour-Dee", defaultUnit: "mL", dose: 20, note: "20–30 mL/gal" },
       { name: "Shooting Powder", defaultUnit: "g", dose: 5.2 },
       { name: "Ful-Power", defaultUnit: "mL", dose: 20 },
     ]
@@ -186,13 +210,48 @@ const MIXING_ORDER = [
   { step: "6", label: "Check PPM", note: "Check your PPM and compare to target. Your pH should be perfect." },
 ];
 
+const AI_SYSTEM_PROMPT = `You are the Kush Coacher AI assistant, built into the Kush Coacher app by MushLuvv. You are an expert cannabis cultivation assistant with deep knowledge of Clinton's expert feeding recipe and growing methodology.
+
+Here is Clinton's complete nutrient recipe:
+
+VEG PHASE (pH 5.8-5.9):
+- Week 1: Bulletproof SI 2mL/gal, Base Nutrients (5-12-26) 1.5g/gal, Epsom Salt 0.5g/gal, Cal-Nit 1g/gal, Great White 1 heaping tsp/10gal, SuperThrive 1.25mL/gal. Target PPM 500-750
+- Week 2: Bulletproof SI 2mL/gal, Base Nutrients 3g/gal, Epsom Salt 1g/gal, Cal-Nit 2g/gal, Great White, SuperThrive 1.25mL/gal. Target PPM 900-1000
+- Week 3: Bulletproof SI 2.5mL/gal, Base Nutrients 3g/gal, Epsom Salt 1g/gal, Cal-Nit 2g/gal, Great White, SuperThrive 1.25mL/gal. Target PPM 900-1000
+- Week 4: Bulletproof SI 2.5mL/gal, Base Nutrients 3.6g/gal, Epsom Salt 1.1g/gal, Cal-Nit 2.4g/gal, Great White, SuperThrive 1.25mL/gal. Target PPM 900-1000
+
+FLOWER PHASE (pH 5.9-6.1):
+- Week 1: SI 2.5mL, Base Nutrients 2g, Epsom Salt 2.5g, Cal-Nit 2.5g, Cutting Edge Bloom 0-6-5 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 750-900
+- Week 2: Same as Week 1. PPM 750-900
+- Week 3: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 2.5g, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 900
+- Week 4: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 2.5g, Cutting Edge Bloom 15mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 900
+- Week 5: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 1.5g, Cutting Edge Bloom 15mL, Sour-Dee 15mL, Great White, Ful-Power 10mL. PPM 900
+- Week 6: SI 2.5mL, Base Nutrients 2g, Epsom Salt 3.5g, Cal-Nit 1g, Cutting Edge Bloom 15mL, Sour-Dee 15mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1100-1250
+- Week 7: Base Nutrients 2g, Epsom Salt 1g, Cutting Edge Bloom 5mL, Sour-Dee 20mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1100-1250
+- Week 8: Base Nutrients 2g, Epsom Salt 1g, Cutting Edge Bloom 5mL, Sour-Dee 20-30mL, Shooting Powder 5.2g, Great White, Ful-Power 20mL. PPM 1100-1250
+- Week 9: Same as Week 8 but no Great White. PPM 1100-1250
+- Week 10: Optional flush/harvest
+
+MIXING ORDER: SI first (raises pH naturally — no adjustment needed), Base Nutrients 2nd, Epsom Salt 3rd (pause 5-10 min), Cal-Nit last of dry ingredients, Ful-Power very last in flower.
+
+TAP WATER starts at roughly 75 PPM — factor this into target PPM.
+
+You answer questions about:
+- Nutrient dosing and deficiencies
+- pH and PPM troubleshooting  
+- Plant health and what to look for each week
+- Mixing instructions
+- General cannabis cultivation advice
+
+Keep answers concise, practical, and helpful. You are talking to real growers. Be direct and knowledgeable like a seasoned expert. Never give medical advice. Always refer to cannabis cultivation only.`;
+
 export default function KushCoacher() {
   const [phase, setPhase] = useState<string>("veg");
   const [weekIndex, setWeekIndex] = useState<number>(0);
   const [gallons, setGallons] = useState<string>("");
   const [ph, setPh] = useState<string>("");
   const [ppm, setPpm] = useState<string>("");
-  const [logEntries, setLogEntries] = useState<any[]>([]);
+  const [logEntries, setLogEntries] = useState<LogEntry[]>([]);
   const [saved, setSaved] = useState<boolean>(false);
   const [showMixing, setShowMixing] = useState<boolean>(false);
   const [showLog, setShowLog] = useState<boolean>(false);
@@ -202,6 +261,10 @@ export default function KushCoacher() {
   const [noteSaved, setNoteSaved] = useState<boolean>(false);
   const [unitOverrides, setUnitOverrides] = useState<Record<string, string>>({});
   const [myAmounts, setMyAmounts] = useState<Record<string, string>>({});
+  const [showAI, setShowAI] = useState<boolean>(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [chatInput, setChatInput] = useState<string>("");
+  const [chatLoading, setChatLoading] = useState<boolean>(false);
 
   const schedule = phase === "veg" ? VEG_SCHEDULE : FLOWER_SCHEDULE;
   const currentWeek = schedule[weekIndex];
@@ -273,7 +336,7 @@ export default function KushCoacher() {
 
   function handleLog(): void {
     if (!gallons) return;
-    setLogEntries((prev: any[]) => [
+    setLogEntries((prev: LogEntry[]) => [
       {
         id: Date.now(),
         date: new Date().toLocaleDateString(),
@@ -289,6 +352,40 @@ export default function KushCoacher() {
     setPpm("");
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
+  }
+
+  async function sendMessage(): Promise<void> {
+    if (!chatInput.trim() || chatLoading) return;
+    const userMessage = chatInput.trim();
+    setChatInput("");
+    setChatMessages((prev: ChatMessage[]) => [...prev, { role: "user", content: userMessage }]);
+    setChatLoading(true);
+    try {
+      const messages = [
+        ...chatMessages,
+        { role: "user" as const, content: userMessage },
+      ];
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: AI_SYSTEM_PROMPT,
+          messages: messages.map((m: ChatMessage) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const data = await response.json();
+      const reply = data.content
+        .filter((block: { type: string; text?: string }) => block.type === "text")
+        .map((block: { type: string; text?: string }) => block.text || "")
+        .join("\n");
+      setChatMessages((prev: ChatMessage[]) => [...prev, { role: "assistant", content: reply }]);
+    } catch (err) {
+      setChatMessages((prev: ChatMessage[]) => [...prev, { role: "assistant", content: "Sorry, I had trouble connecting. Please try again." }]);
+    } finally {
+      setChatLoading(false);
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -314,7 +411,7 @@ export default function KushCoacher() {
         <div style={{ fontSize: 12, color: "#666", marginTop: 5 }}>Expert chart by Clinton</div>
       </div>
 
-      <div style={{ maxWidth: 580, margin: "0 auto", padding: "20px 16px 60px" }}>
+      <div style={{ maxWidth: 580, margin: "0 auto", padding: "20px 16px 100px" }}>
 
         {/* PHASE TOGGLE */}
         <div style={{ display: "flex", gap: 10, marginBottom: 22 }}>
@@ -516,7 +613,7 @@ export default function KushCoacher() {
             </button>
             {showLog && (
               <div style={{ background: "#0e0e0e", border: "1px solid #1e1e1e", borderTop: "none", borderRadius: "0 0 12px 12px", overflow: "hidden" }}>
-                {logEntries.map((e: any, i: number) => (
+                {logEntries.map((e: LogEntry, i: number) => (
                   <div key={e.id} style={{ padding: "12px 18px", borderBottom: i < logEntries.length - 1 ? "1px solid #161616" : "none", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     <div>
                       <div style={{ fontSize: 13, color: "#ccc" }}>{e.week}</div>
@@ -533,6 +630,92 @@ export default function KushCoacher() {
           </>
         )}
       </div>
+
+      {/* AI ASSISTANT FLOATING BUTTON */}
+      <button
+        onClick={() => setShowAI(true)}
+        style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: "linear-gradient(135deg, #4ade80, #22c55e)", border: "none", fontSize: 26, cursor: "pointer", boxShadow: "0 4px 20px rgba(74,222,128,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}
+      >
+        🌿
+      </button>
+
+      {/* AI ASSISTANT MODAL */}
+      {showAI && (
+        <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}>
+          <div style={{ background: "#0e0e0e", border: "1px solid #2a2a2a", borderRadius: "20px 20px 0 0", width: "100%", maxWidth: 580, height: "80vh", display: "flex", flexDirection: "column" }}>
+
+            {/* AI Header */}
+            <div style={{ padding: "18px 20px", borderBottom: "1px solid #1a1a1a", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase", marginBottom: 4 }}>Kush Coacher AI</div>
+                <div style={{ fontSize: 16, fontWeight: "bold", color: "#4ade80" }}>🌿 Ask the Coach</div>
+              </div>
+              <button
+                onClick={() => setShowAI(false)}
+                style={{ background: "#222", border: "none", borderRadius: "50%", width: 34, height: 34, color: "#888", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
+              >×</button>
+            </div>
+
+            {/* Chat Messages */}
+            <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
+              {chatMessages.length === 0 && (
+                <div style={{ textAlign: "center", padding: "40px 20px" }}>
+                  <div style={{ fontSize: 32, marginBottom: 12 }}>🌿</div>
+                  <div style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>Ask me anything about your grow — nutrients, pH, PPM, deficiencies, or what to look for this week.</div>
+                  <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 8 }}>
+                    {[
+                      "My pH keeps dropping, what do I do?",
+                      "What should my plants look like in week 4 of flower?",
+                      "My PPM is too high, how do I fix it?",
+                    ].map((q: string, i: number) => (
+                      <button
+                        key={i}
+                        onClick={() => setChatInput(q)}
+                        style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #222", background: "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer", textAlign: "left" }}
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {chatMessages.map((msg: ChatMessage, i: number) => (
+                <div key={i} style={{ display: "flex", justifyContent: msg.role === "user" ? "flex-end" : "flex-start" }}>
+                  <div style={{ maxWidth: "85%", padding: "12px 14px", borderRadius: msg.role === "user" ? "14px 14px 4px 14px" : "14px 14px 14px 4px", background: msg.role === "user" ? "#052e16" : "#141414", border: `1px solid ${msg.role === "user" ? "#4ade80" : "#2a2a2a"}`, color: msg.role === "user" ? "#4ade80" : "#ccc", fontSize: 13, lineHeight: 1.6 }}>
+                    {msg.content}
+                  </div>
+                </div>
+              ))}
+              {chatLoading && (
+                <div style={{ display: "flex", justifyContent: "flex-start" }}>
+                  <div style={{ padding: "12px 14px", borderRadius: "14px 14px 14px 4px", background: "#141414", border: "1px solid #2a2a2a", color: "#555", fontSize: 13 }}>
+                    🌿 thinking...
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Chat Input */}
+            <div style={{ padding: "12px 16px", borderTop: "1px solid #1a1a1a", display: "flex", gap: 10 }}>
+              <input
+                type="text"
+                placeholder="Ask the coach..."
+                value={chatInput}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChatInput(e.target.value)}
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { if (e.key === "Enter") sendMessage(); }}
+                style={{ flex: 1, padding: "12px 14px", borderRadius: 12, border: "1px solid #222", background: "#111", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none" }}
+              />
+              <button
+                onClick={sendMessage}
+                disabled={chatLoading || !chatInput.trim()}
+                style={{ padding: "12px 16px", borderRadius: 12, border: "none", background: chatLoading || !chatInput.trim() ? "#1a1a1a" : "#052e16", color: chatLoading || !chatInput.trim() ? "#444" : "#4ade80", fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: chatLoading || !chatInput.trim() ? "default" : "pointer", border: `1px solid ${chatLoading || !chatInput.trim() ? "#222" : "#4ade80"}` }}
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* GROW NOTES MODAL */}
       {activeNotesKey && (
