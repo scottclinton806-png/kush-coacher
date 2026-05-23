@@ -36,70 +36,65 @@ interface ChatMessage {
   content: string;
 }
 
-// Simulation data from Clinton's real reservoir test
 const SIM_DATA: Record<string, { ppmPerUnit: number; phChangePerUnit: number }> = {
-  "Bulletproof SI":           { ppmPerUnit: 20,   phChangePerUnit: 0.96  },  // +2.4 per 2.5mL/gal — verified
-  "Base Nutrients (5-12-26)": { ppmPerUnit: 150,  phChangePerUnit: -0.47 },  // -0.94 per 2g/gal — verified
-  "Epsom Salt":               { ppmPerUnit: 90,   phChangePerUnit: 0.04  },  // +0.04 per 1g/gal — verified (raises pH!)
-  "Cal-Nit (15-0-0)":        { ppmPerUnit: 130,  phChangePerUnit: 0.10  },  // +0.10 per 1g/gal — verified (raises pH!)
-  "Cutting Edge Bloom 0-6-5": { ppmPerUnit: 29,   phChangePerUnit: -0.235 }, // -2.35 per 10mL/gal — verified
-  "Sour-Dee":                 { ppmPerUnit: 9.5,  phChangePerUnit: 0     },  // neutral — verified
-  "Shooting Powder":          { ppmPerUnit: 92,   phChangePerUnit: -0.15 },  // -0.4 per 2.6g/gal
-  "Ful-Power":                { ppmPerUnit: 0,    phChangePerUnit: 0.005 },  // +0.1 per 20mL/gal
-  "Great White":              { ppmPerUnit: 0,    phChangePerUnit: 0     },  // no impact
-  "SuperThrive":              { ppmPerUnit: 0,    phChangePerUnit: 0     },  // no impact
+  "Bulletproof SI":           { ppmPerUnit: 6.67,  phChangePerUnit: 1.4   },
+  "Base Nutrients (5-12-26)": { ppmPerUnit: 55,    phChangePerUnit: -0.65 },
+  "Epsom Salt":               { ppmPerUnit: 90,    phChangePerUnit: 0     },
+  "Cal-Nit (15-0-0)":        { ppmPerUnit: 130,   phChangePerUnit: -0.02 },
+  "Cutting Edge Bloom 0-6-5": { ppmPerUnit: 29,    phChangePerUnit: -0.235 },
+  "Sour-Dee":                 { ppmPerUnit: 9.5,   phChangePerUnit: 0     },
+  "Shooting Powder":          { ppmPerUnit: 92,    phChangePerUnit: -0.15 },
+  "Ful-Power":                { ppmPerUnit: 0,     phChangePerUnit: 0.005 },
+  "Great White":              { ppmPerUnit: 0,     phChangePerUnit: 0     },
 };
 
 const VEG_SCHEDULE: WeekSchedule[] = [
   {
-    week: "Veg Week 1", targetPPM: "400–500", pH: "5.8–5.9",
+    week: "Veg Week 1", targetPPM: "580–680", pH: "5.7–6.4",
     nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2,    ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 1.5,  toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 0.5,  ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 1,    ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 0.25,  ...SIM_DATA["Bulletproof SI"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.25, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,    ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 1.5,  ...SIM_DATA["Cal-Nit (15-0-0)"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1,  note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
-      { name: "SuperThrive",              defaultUnit: "mL", dose: 1.25, ...SIM_DATA["SuperThrive"] },
     ]
   },
   {
-    week: "Veg Week 2", targetPPM: "800–900", pH: "5.8–5.9",
+    week: "Veg Week 2", targetPPM: "950–1050", pH: "5.7–6.4",
     nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2,   ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
-      { name: "SuperThrive",              defaultUnit: "mL", dose: 1.25,...SIM_DATA["SuperThrive"] },
-    ]
-  },
-  {
-    week: "Veg Week 3", targetPPM: "800–900", pH: "5.8–5.9",
-    nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
-      { name: "SuperThrive",              defaultUnit: "mL", dose: 1.25,...SIM_DATA["SuperThrive"] },
-    ]
-  },
-  {
-    week: "Veg Week 4", targetPPM: "950–1050", pH: "5.8–5.9",
-    nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1,     ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.6, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1.1, ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2.4, ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 2,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
-      { name: "SuperThrive",              defaultUnit: "mL", dose: 1.25,...SIM_DATA["SuperThrive"] },
+    ]
+  },
+  {
+    week: "Veg Week 3", targetPPM: "980–1090", pH: "5.7–6.4",
+    nutrients: [
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.2, ...SIM_DATA["Bulletproof SI"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 2,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
+    ]
+  },
+  {
+    week: "Veg Week 4", targetPPM: "1100–1200", pH: "5.7–6.4",
+    nutrients: [
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.75, ...SIM_DATA["Bulletproof SI"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 2,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1, ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
     ]
   },
 ];
 
 const FLOWER_SCHEDULE: WeekSchedule[] = [
   {
-    week: "Flower Week 1", targetPPM: "1200–1350", pH: "5.9–6.1",
+    week: "Flower Week 1", targetPPM: "1000–1200", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -112,7 +107,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 2", targetPPM: "1200–1350", pH: "5.9–6.1",
+    week: "Flower Week 2", targetPPM: "1000–1200", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -125,7 +120,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 3", targetPPM: "1250–1400", pH: "5.9–6.1",
+    week: "Flower Week 3", targetPPM: "1150–1350", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -138,7 +133,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 4", targetPPM: "1700–1850", pH: "5.9–6.1",
+    week: "Flower Week 4", targetPPM: "1300–1550", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -151,7 +146,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 5", targetPPM: "1600–1750", pH: "5.9–6.1",
+    week: "Flower Week 5", targetPPM: "1200–1450", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -164,7 +159,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 6", targetPPM: "1550–1700", pH: "5.9–6.1",
+    week: "Flower Week 6", targetPPM: "1350–1550", pH: "5.7–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -178,7 +173,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 7", targetPPM: "600–700", pH: "5.9–6.1",
+    week: "Flower Week 7", targetPPM: "620–780", pH: "5.7–6.4",
     nutrients: [
       { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
@@ -189,10 +184,9 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 8", targetPPM: "850–950", pH: "5.9–6.1",
+    week: "Flower Week 8", targetPPM: "650–800", pH: "5.7–6.4",
     nutrients: [
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 20,  note: "20–30 mL/gal", ...SIM_DATA["Sour-Dee"] },
       { name: "Shooting Powder",          defaultUnit: "g",  dose: 5.2, ...SIM_DATA["Shooting Powder"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
@@ -200,17 +194,16 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 9", targetPPM: "850–950", pH: "5.9–6.1",
+    week: "Flower Week 9", targetPPM: "650–800", pH: "5.7–6.4",
     nutrients: [
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 20,  note: "20–30 mL/gal", ...SIM_DATA["Sour-Dee"] },
       { name: "Shooting Powder",          defaultUnit: "g",  dose: 5.2, ...SIM_DATA["Shooting Powder"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 20,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 10", targetPPM: "0", pH: "6.1–6.3", flush: true,
+    week: "Flower Week 10", targetPPM: "0", pH: "5.7–6.4", flush: true,
     nutrients: [],
   },
 ];
@@ -224,43 +217,42 @@ const MIXING_ORDER = [
   { step: "6", label: "Check PPM", note: "Check your PPM and compare to target. Your pH should be perfect." },
 ];
 
-const AI_SYSTEM_PROMPT = `You are the Kush Coacher AI assistant, built into the Kush Coacher app by MushLuvv. You are an expert cannabis cultivation assistant with deep knowledge of Clinton's expert feeding recipe and growing methodology.
+const AI_SYSTEM_PROMPT = `You are the Kush Coacher AI assistant built into the Kush Coacher app by MushLuvv. You are an expert cannabis cultivation assistant with deep knowledge of Clinton's verified feeding recipe.
 
-CLINTON'S COMPLETE NUTRIENT RECIPE:
+CLINTON'S VERIFIED RECIPE (real tested doses):
 
-VEG PHASE (pH 5.8-5.9):
-- Week 1: Bulletproof SI 2mL/gal, Base Nutrients (5-12-26) 1.5g/gal, Epsom Salt 0.5g/gal, Cal-Nit 1g/gal, Great White 1 heaping tsp/10gal, SuperThrive 1.25mL/gal. Target PPM 500-750
-- Week 2: Bulletproof SI 2mL/gal, Base Nutrients 3g/gal, Epsom Salt 1g/gal, Cal-Nit 2g/gal, Great White, SuperThrive 1.25mL/gal. Target PPM 900-1000
-- Week 3: Bulletproof SI 2.5mL/gal, Base Nutrients 3g/gal, Epsom Salt 1g/gal, Cal-Nit 2g/gal, Great White, SuperThrive. Target PPM 900-1000
-- Week 4: Bulletproof SI 2.5mL/gal, Base Nutrients 3.6g/gal, Epsom Salt 1.1g/gal, Cal-Nit 2.4g/gal, Great White, SuperThrive. Target PPM 900-1000
+VEG PHASE (target pH 5.7-6.4):
+- Week 1: SI 2.5mL/gal, Base Nutrients 2.25g/gal, Epsom Salt 1g/gal, Cal-Nit 1.5g/gal, Great White. Target PPM 580-680
+- Week 2: SI 1mL/gal, Base Nutrients 3.6g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Great White. Target PPM 950-1050
+- Week 3: SI 1.2mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Great White. Target PPM 980-1100
+- Week 4: SI 1.5mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2.5g/gal, Bloom 1.5mL/gal, Great White. Target PPM 1100-1200
 
-FLOWER PHASE (pH 5.9-6.1):
-- Week 1: SI 2.5mL, Base Nutrients 2g, Epsom Salt 2.5g, Cal-Nit 2.5g, Cutting Edge Bloom 0-6-5 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 750-900
-- Week 2: Same as Week 1. PPM 750-900
-- Week 3: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 2.5g, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 900
-- Week 4: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 2.5g, Cutting Edge Bloom 15mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 900
-- Week 5: SI 2.5mL, Base Nutrients 3.6g, Epsom Salt 3.5g, Cal-Nit 1.5g, Cutting Edge Bloom 15mL, Sour-Dee 15mL, Great White, Ful-Power 10mL. PPM 900
-- Week 6: SI 2.5mL, Base Nutrients 2g, Epsom Salt 3.5g, Cal-Nit 1g, Cutting Edge Bloom 15mL, Sour-Dee 15mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1100-1250
-- Week 7: Epsom Salt 1g, Cutting Edge Bloom 5mL, Sour-Dee 20mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1100-1250
-- Week 8: Epsom Salt 1g, Cutting Edge Bloom 5mL, Sour-Dee 20-30mL, Shooting Powder 5.2g, Great White, Ful-Power 20mL. PPM 1100-1250
-- Week 9: Epsom Salt 1g, Cutting Edge Bloom 5mL, Sour-Dee 20-30mL, Shooting Powder 5.2g, Ful-Power 20mL. No Great White. PPM 1100-1250
+FLOWER PHASE (target pH 5.7-6.4):
+- Week 1: SI 2.5mL, Base Nutrients 2g, Epsom Salt 2.5g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1000-1200
+- Week 2: Same as Week 1. PPM 1000-1200
+- Week 3: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1150-1350
+- Week 4: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 2.5g, Bloom 15mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1300-1550
+- Week 5: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 1.5g, Bloom 15mL, Sour-Dee 15mL, Great White, Ful-Power 10mL. PPM 1200-1450
+- Week 6: SI 2.5mL, Base Nutrients 2g, Epsom Salt 3.5g, Cal-Nit 1g, Bloom 15mL, Sour-Dee 15mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1350-1550
+- Week 7: Epsom Salt 1g, Bloom 5mL, Sour-Dee 20mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 620-780
+- Week 8: Bloom 1mL, Sour-Dee 20-30mL, Shooting Powder 5.2g, Great White, Ful-Power 20mL. PPM 650-800
+- Week 9: Same as Week 8 but no Great White. PPM 650-800
 - Week 10: Optional flush/harvest
 
-MIXING ORDER: SI first (raises pH naturally), Base Nutrients 2nd (mix until translucent with slight red tint — cloudy means not dissolved), Epsom Salt 3rd (mix then sit 5 min), Cal-Nit last dry ingredient (mix then sit 5 min), Ful-Power very last in flower.
+MIXING ORDER: SI first, Base Nutrients 2nd (mix until translucent red tint — cloudy means not dissolved), Epsom Salt 3rd (sit 5 min), Cal-Nit 4th (sit 5 min), Ful-Power very last in flower.
 
-TAP WATER: ~75 PPM baseline. RO WATER: 0-10 PPM, calculate from zero.
+WATER: RO water 0-10 PPM baseline. Tap water ~75 PPM baseline.
 
-REAL SIMULATION DATA (per unit per gallon):
-- Bulletproof SI: +20 PPM per mL/gal, +0.96 pH per mL/gal
-- Base Nutrients: +150 PPM per g/gal, -0.47 pH per g/gal (verified test)
-- Epsom Salt: +90 PPM per g/gal, +0.04 pH per g/gal — raises pH slightly (verified test)
-- Cal-Nit: +130 PPM per g/gal, +0.10 pH per g/gal — raises pH slightly (verified test)
-- Cutting Edge Bloom 0-6-5: +29 PPM per mL/gal, -0.235 pH per mL/gal (verified test)
-- Sour-Dee: +9.5 PPM per mL/gal, neutral pH
-- Shooting Powder: +92 PPM per g/gal, -0.15 pH per g/gal
-- Ful-Power: 0 PPM, slight +0.005 pH per mL/gal
+VERIFIED SIM DATA per unit per gallon:
+- Bulletproof SI: +6.67 PPM, +1.4 pH per mL/gal
+- Base Nutrients: +55 PPM, -0.65 pH per g/gal
+- Epsom Salt: +90 PPM, neutral pH
+- Cal-Nit: +130 PPM, -0.02 pH per g/gal
+- Cutting Edge Bloom 0-6-5: +29 PPM, -0.235 pH per mL/gal
+- Sour-Dee: +9.5 PPM, neutral pH
+- Shooting Powder: +92 PPM, -0.15 pH per g/gal
 
-Answer questions about nutrients, pH, PPM, deficiencies, plant health, mixing instructions, and general cannabis cultivation. Be direct, practical, and knowledgeable. Never give medical advice.`;
+Answer questions about nutrients, pH, PPM, deficiencies, plant health, mixing. Be direct and expert. Never give medical advice.`;
 
 export default function KushCoacher() {
   const [phase, setPhase] = useState<string>("veg");
@@ -291,9 +283,8 @@ export default function KushCoacher() {
   const phaseColor = phase === "veg" ? "#4ade80" : "#fb923c";
   const phaseDark = phase === "veg" ? "#052e16" : "#1c0700";
   const basePPM = waterType === "tap" ? 75 : 0;
-  const basePH = waterType === "tap" ? 7.2 : 6.8;
+  const basePH = waterType === "tap" ? 7.2 : 6.2;
 
-  // Calculate simulated pH and PPM — uses myAmounts when entered, falls back to recommended dose
   function calcSimulator(): { simPH: number; simPPM: number } {
     if (!gal) return { simPH: basePH, simPPM: basePPM };
     let simPH = basePH;
@@ -302,9 +293,7 @@ export default function KushCoacher() {
       const unit = getUnit(n);
       if (unit !== n.defaultUnit) return;
       const myAmt = myAmounts[`${currentWeek.week}-${n.name}`];
-      const dose = myAmt && parseFloat(myAmt) > 0
-        ? parseFloat(myAmt) / (gal || 1)  // convert total back to per-gal
-        : n.dose;
+      const dose = myAmt && parseFloat(myAmt) > 0 ? parseFloat(myAmt) / (gal || 1) : n.dose;
       if (!dose) return;
       simPPM += n.ppmPerUnit * dose;
       simPH += n.phChangePerUnit * dose;
@@ -312,7 +301,6 @@ export default function KushCoacher() {
     return { simPH: Math.max(0, Math.round(simPH * 100) / 100), simPPM: Math.round(simPPM) };
   }
 
-  // Calculate running pH and PPM up to and including a specific nutrient index
   function calcRunningAtIndex(upToIndex: number): { runPH: number; runPPM: number } {
     if (!gal) return { runPH: basePH, runPPM: basePPM };
     let runPH = basePH;
@@ -322,9 +310,7 @@ export default function KushCoacher() {
       const unit = getUnit(n);
       if (unit !== n.defaultUnit) return;
       const myAmt = myAmounts[`${currentWeek.week}-${n.name}`];
-      const dose = myAmt && parseFloat(myAmt) > 0
-        ? parseFloat(myAmt) / (gal || 1)
-        : n.dose;
+      const dose = myAmt && parseFloat(myAmt) > 0 ? parseFloat(myAmt) / (gal || 1) : n.dose;
       if (!dose) return;
       runPPM += n.ppmPerUnit * dose;
       runPH += n.phChangePerUnit * dose;
@@ -332,9 +318,6 @@ export default function KushCoacher() {
     return { runPH: Math.max(0, Math.round(runPH * 100) / 100), runPPM: Math.round(runPPM) };
   }
 
-  const { simPH, simPPM } = calcSimulator();
-
-  // Parse target ranges
   function inPHRange(ph: number): boolean {
     const range = currentWeek.pH.split("–");
     if (range.length !== 2) return true;
@@ -383,10 +366,7 @@ export default function KushCoacher() {
     return (nutrient.dose * gal).toFixed(2);
   }
 
-  function getDiff(
-    recommended: string | null,
-    myAmt: string
-  ): { label: string; color: string } | null {
+  function getDiff(recommended: string | null, myAmt: string): { label: string; color: string } | null {
     if (!recommended || !myAmt || recommended.includes("tsp")) return null;
     const diff = parseFloat(myAmt) - parseFloat(recommended);
     if (isNaN(diff)) return null;
@@ -413,20 +393,13 @@ export default function KushCoacher() {
 
   function handleLog(): void {
     if (!gallons) return;
-    setLogEntries((prev: LogEntry[]) => [
-      {
-        id: Date.now(),
-        date: new Date().toLocaleDateString(),
-        phase,
-        week: currentWeek.week,
-        gallons,
-        ph: ph || "—",
-        ppm: ppm || "—",
-      },
-      ...prev,
-    ]);
-    setPh("");
-    setPpm("");
+    setLogEntries((prev: LogEntry[]) => [{
+      id: Date.now(),
+      date: new Date().toLocaleDateString(),
+      phase, week: currentWeek.week, gallons,
+      ph: ph || "—", ppm: ppm || "—",
+    }, ...prev]);
+    setPh(""); setPpm("");
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
   }
@@ -456,27 +429,22 @@ export default function KushCoacher() {
         .join("\n");
       setChatMessages((prev: ChatMessage[]) => [...prev, { role: "assistant", content: reply }]);
     } catch {
-      setChatMessages((prev: ChatMessage[]) => [...prev, { role: "assistant", content: "Sorry, I had trouble connecting. Please try again." }]);
+      setChatMessages((prev: ChatMessage[]) => [...prev, { role: "assistant", content: "Sorry I had trouble connecting. Please try again." }]);
     } finally {
       setChatLoading(false);
     }
   }
 
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "11px 12px",
-    borderRadius: 10,
-    border: "1px solid #222",
-    background: "#0a0a0a",
-    color: "#e4ddd0",
-    fontFamily: "Georgia, serif",
-    fontSize: 15,
-    outline: "none",
-    boxSizing: "border-box",
-  };
-
+  const { simPH, simPPM } = calcSimulator();
   const phOk = inPHRange(simPH);
   const ppmOk = inPPMRange(simPPM);
+
+  const inputStyle: React.CSSProperties = {
+    width: "100%", padding: "11px 12px", borderRadius: 10,
+    border: "1px solid #222", background: "#0a0a0a",
+    color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 15,
+    outline: "none", boxSizing: "border-box",
+  };
 
   return (
     <div style={{ minHeight: "100vh", background: "#080808", fontFamily: "'Georgia', serif", color: "#e4ddd0" }}>
@@ -496,11 +464,8 @@ export default function KushCoacher() {
             { id: "veg", label: "🌱 Veg", color: "#4ade80", dark: "#052e16" },
             { id: "flower", label: "🌸 Flower", color: "#fb923c", dark: "#1c0700" },
           ].map((p) => (
-            <button
-              key={p.id}
-              onClick={() => { setPhase(p.id); setWeekIndex(0); }}
-              style={{ flex: 1, padding: "13px 0", borderRadius: 12, border: `2px solid ${phase === p.id ? p.color : "#222"}`, background: phase === p.id ? p.dark : "#111", color: phase === p.id ? p.color : "#555", fontFamily: "Georgia, serif", fontSize: 15, fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}
-            >
+            <button key={p.id} onClick={() => { setPhase(p.id); setWeekIndex(0); }}
+              style={{ flex: 1, padding: "13px 0", borderRadius: 12, border: `2px solid ${phase === p.id ? p.color : "#222"}`, background: phase === p.id ? p.dark : "#111", color: phase === p.id ? p.color : "#555", fontFamily: "Georgia, serif", fontSize: 15, fontWeight: "bold", cursor: "pointer", transition: "all 0.2s" }}>
               {p.label}
             </button>
           ))}
@@ -512,16 +477,12 @@ export default function KushCoacher() {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
             {schedule.map((w: WeekSchedule, i: number) => (
               <div key={i} style={{ display: "flex", gap: 4, alignItems: "center" }}>
-                <button
-                  onClick={() => setWeekIndex(i)}
-                  style={{ padding: "7px 14px", borderRadius: 20, border: `1px solid ${weekIndex === i ? phaseColor : "#222"}`, background: weekIndex === i ? phaseDark : "#111", color: weekIndex === i ? phaseColor : "#666", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer" }}
-                >
+                <button onClick={() => setWeekIndex(i)}
+                  style={{ padding: "7px 14px", borderRadius: 20, border: `1px solid ${weekIndex === i ? phaseColor : "#222"}`, background: weekIndex === i ? phaseDark : "#111", color: weekIndex === i ? phaseColor : "#666", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer" }}>
                   {w.flush ? `Wk ${i + 1} 💧` : `Wk ${i + 1}`}
                 </button>
-                <button
-                  onClick={() => openNotes(w.week)}
-                  style={{ padding: "5px 8px", borderRadius: 16, border: `1px solid ${growNotes[w.week] ? "#7c6f2a" : "#222"}`, background: growNotes[w.week] ? "#1a1700" : "#111", color: growNotes[w.week] ? "#e2c94a" : "#444", fontSize: 11, cursor: "pointer", fontFamily: "Georgia, serif" }}
-                >
+                <button onClick={() => openNotes(w.week)}
+                  style={{ padding: "5px 8px", borderRadius: 16, border: `1px solid ${growNotes[w.week] ? "#7c6f2a" : "#222"}`, background: growNotes[w.week] ? "#1a1700" : "#111", color: growNotes[w.week] ? "#e2c94a" : "#444", fontSize: 11, cursor: "pointer", fontFamily: "Georgia, serif" }}>
                   {growNotes[w.week] ? "📝" : "✏️"}
                 </button>
               </div>
@@ -538,13 +499,9 @@ export default function KushCoacher() {
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 8, alignItems: "flex-end" }}>
-            {currentWeek.flush && (
-              <div style={{ background: "#111", border: "1px solid #333", borderRadius: 8, padding: "5px 12px", fontSize: 12, color: "#888" }}>OPTIONAL</div>
-            )}
-            <button
-              onClick={() => openNotes(currentWeek.week)}
-              style={{ padding: "7px 14px", borderRadius: 10, border: `1px solid ${growNotes[currentWeek.week] ? "#7c6f2a" : phaseColor}`, background: growNotes[currentWeek.week] ? "#1a1700" : phaseDark, color: growNotes[currentWeek.week] ? "#e2c94a" : phaseColor, fontFamily: "Georgia, serif", fontSize: 12, fontWeight: "bold", cursor: "pointer" }}
-            >
+            {currentWeek.flush && <div style={{ background: "#111", border: "1px solid #333", borderRadius: 8, padding: "5px 12px", fontSize: 12, color: "#888" }}>OPTIONAL</div>}
+            <button onClick={() => openNotes(currentWeek.week)}
+              style={{ padding: "7px 14px", borderRadius: 10, border: `1px solid ${growNotes[currentWeek.week] ? "#7c6f2a" : phaseColor}`, background: growNotes[currentWeek.week] ? "#1a1700" : phaseDark, color: growNotes[currentWeek.week] ? "#e2c94a" : phaseColor, fontFamily: "Georgia, serif", fontSize: 12, fontWeight: "bold", cursor: "pointer" }}>
               {growNotes[currentWeek.week] ? "📝 View Notes" : "📝 Grow Notes"}
             </button>
           </div>
@@ -553,66 +510,45 @@ export default function KushCoacher() {
         {/* RESERVOIR + WATER TYPE + LIVE GAUGES */}
         <div style={{ background: "#111", border: "1px solid #1e1e1e", borderRadius: 14, padding: "16px 18px", marginBottom: 20 }}>
           <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "start" }}>
-
-            {/* Gallons input */}
             <div>
               <label style={{ fontSize: 10, letterSpacing: 3, color: "#555", textTransform: "uppercase", display: "block", marginBottom: 8 }}>Gallons</label>
-              <input
-                type="number" min="0" step="0.5" placeholder="e.g. 10"
-                value={gallons}
+              <input type="number" min="0" step="0.5" placeholder="e.g. 10" value={gallons}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setGallons(e.target.value)}
-                style={{ width: "100%", padding: "12px 10px", borderRadius: 10, border: "1px solid #222", background: "#0a0a0a", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 16, outline: "none", boxSizing: "border-box" }}
-              />
+                style={{ width: "100%", padding: "12px 10px", borderRadius: 10, border: "1px solid #222", background: "#0a0a0a", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 16, outline: "none", boxSizing: "border-box" }} />
             </div>
-
-            {/* Water Type Toggle */}
             <div>
               <label style={{ fontSize: 10, letterSpacing: 3, color: "#555", textTransform: "uppercase", display: "block", marginBottom: 8 }}>Water</label>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <button
-                  onClick={() => setWaterType("ro")}
-                  style={{ padding: "6px 10px", borderRadius: 8, border: `1px solid ${waterType === "ro" ? "#60a5fa" : "#222"}`, background: waterType === "ro" ? "#0a1a2a" : "#0a0a0a", color: waterType === "ro" ? "#60a5fa" : "#555", fontFamily: "Georgia, serif", fontSize: 11, fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}
-                >
+                <button onClick={() => setWaterType("ro")}
+                  style={{ padding: "6px 10px", borderRadius: 8, border: `1px solid ${waterType === "ro" ? "#60a5fa" : "#222"}`, background: waterType === "ro" ? "#0a1a2a" : "#0a0a0a", color: waterType === "ro" ? "#60a5fa" : "#555", fontFamily: "Georgia, serif", fontSize: 11, fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}>
                   🔬 RO
                 </button>
-                <button
-                  onClick={() => setWaterType("tap")}
-                  style={{ padding: "6px 10px", borderRadius: 8, border: `1px solid ${waterType === "tap" ? "#f59e0b" : "#222"}`, background: waterType === "tap" ? "#1a1200" : "#0a0a0a", color: waterType === "tap" ? "#f59e0b" : "#555", fontFamily: "Georgia, serif", fontSize: 11, fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}
-                >
+                <button onClick={() => setWaterType("tap")}
+                  style={{ padding: "6px 10px", borderRadius: 8, border: `1px solid ${waterType === "tap" ? "#f59e0b" : "#222"}`, background: waterType === "tap" ? "#1a1200" : "#0a0a0a", color: waterType === "tap" ? "#f59e0b" : "#555", fontFamily: "Georgia, serif", fontSize: 11, fontWeight: "bold", cursor: "pointer", whiteSpace: "nowrap" }}>
                   💧 Tap
                 </button>
               </div>
             </div>
-
-            {/* Live Gauges */}
             <div>
               <label style={{ fontSize: 10, letterSpacing: 3, color: "#555", textTransform: "uppercase", display: "block", marginBottom: 8 }}>Predicted</label>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <div style={{ background: "#0a0a0a", borderRadius: 8, padding: "6px 10px", border: `1px solid ${gal ? (phOk ? "#22c55e" : "#ef4444") : "#222"}` }}>
                   <div style={{ fontSize: 9, color: "#555", letterSpacing: 2, textTransform: "uppercase" }}>pH</div>
-                  <div style={{ fontSize: 16, fontWeight: "bold", color: gal ? (phOk ? "#22c55e" : "#ef4444") : "#333" }}>
-                    {gal ? simPH.toFixed(2) : "—"}
-                  </div>
+                  <div style={{ fontSize: 16, fontWeight: "bold", color: gal ? (phOk ? "#22c55e" : "#ef4444") : "#333" }}>{gal ? simPH.toFixed(2) : "—"}</div>
                 </div>
                 <div style={{ background: "#0a0a0a", borderRadius: 8, padding: "6px 10px", border: `1px solid ${gal ? (ppmOk ? "#22c55e" : "#ef4444") : "#222"}` }}>
                   <div style={{ fontSize: 9, color: "#555", letterSpacing: 2, textTransform: "uppercase" }}>PPM</div>
-                  <div style={{ fontSize: 16, fontWeight: "bold", color: gal ? (ppmOk ? "#22c55e" : "#ef4444") : "#333" }}>
-                    {gal ? simPPM : "—"}
-                  </div>
+                  <div style={{ fontSize: 16, fontWeight: "bold", color: gal ? (ppmOk ? "#22c55e" : "#ef4444") : "#333" }}>{gal ? simPPM : "—"}</div>
                 </div>
               </div>
             </div>
           </div>
-
-          {/* Water type info */}
           <div style={{ marginTop: 10, fontSize: 11, color: "#444" }}>
-            {waterType === "ro"
-              ? "🔬 RO water: 0–10 PPM baseline — calculated from zero"
-              : "💧 Tap water: ~75 PPM baseline — factor into your target"}
+            {waterType === "ro" ? "🔬 RO water: 0–10 PPM baseline — calculated from zero" : "💧 Tap water: ~75 PPM baseline — factor into your target"}
           </div>
           {gal > 0 && (
             <div style={{ marginTop: 6, fontSize: 11, color: phOk && ppmOk ? "#22c55e" : "#ef4444" }}>
-              {phOk && ppmOk ? "✓ Looking good! pH and PPM both in target range" : `⚠️ ${!phOk ? "pH" : ""} ${!phOk && !ppmOk ? "and" : ""} ${!ppmOk ? "PPM" : ""} outside target range`}
+              {phOk && ppmOk ? "✓ Looking good! pH and PPM both in target range" : `⚠️ ${!phOk ? "pH" : ""}${!phOk && !ppmOk ? " and " : ""}${!ppmOk ? "PPM" : ""} outside target range`}
             </div>
           )}
         </div>
@@ -625,7 +561,6 @@ export default function KushCoacher() {
               <div style={{ textAlign: "center" }}>Recommended</div>
               <div style={{ textAlign: "center" }}>Your Amount</div>
             </div>
-
             {currentWeek.nutrients.filter((n: Nutrient) => !n.skip).map((n: Nutrient, i: number, arr: Nutrient[]) => {
               const unit = getUnit(n);
               const recommended = calcDose(n);
@@ -641,11 +576,8 @@ export default function KushCoacher() {
                     {n.toggleable ? (
                       <div style={{ display: "flex", borderRadius: 8, overflow: "hidden", border: "1px solid #2a2a2a" }}>
                         {["g", "mL"].map((u: string) => (
-                          <button
-                            key={u}
-                            onClick={() => toggleUnit(n)}
-                            style={{ padding: "4px 10px", fontSize: 11, background: unit === u ? phaseColor : "#1a1a1a", color: unit === u ? "#000" : "#555", border: "none", cursor: "pointer", fontFamily: "Georgia, serif", fontWeight: unit === u ? "bold" : "normal" }}
-                          >
+                          <button key={u} onClick={() => toggleUnit(n)}
+                            style={{ padding: "4px 10px", fontSize: 11, background: unit === u ? phaseColor : "#1a1a1a", color: unit === u ? "#000" : "#555", border: "none", cursor: "pointer", fontFamily: "Georgia, serif", fontWeight: unit === u ? "bold" : "normal" }}>
                             {u}
                           </button>
                         ))}
@@ -669,12 +601,9 @@ export default function KushCoacher() {
                       )}
                     </div>
                     <div style={{ textAlign: "center" }}>
-                      <input
-                        type="number" step="0.1" placeholder="—"
-                        value={myAmt}
+                      <input type="number" step="0.1" placeholder="—" value={myAmt}
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMyAmount(n.name, e.target.value)}
-                        style={{ width: "100%", padding: "6px 4px", borderRadius: 8, textAlign: "center", border: "1px solid #222", background: "#0a0a0a", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none", boxSizing: "border-box" }}
-                      />
+                        style={{ width: "100%", padding: "6px 4px", borderRadius: 8, textAlign: "center", border: "1px solid #222", background: "#0a0a0a", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none", boxSizing: "border-box" }} />
                       {diff && <div style={{ fontSize: 10, color: diff.color, marginTop: 3 }}>{diff.label}</div>}
                       {myAmt && gal > 0 && (() => {
                         const { runPH, runPPM } = calcRunningAtIndex(i);
@@ -702,10 +631,8 @@ export default function KushCoacher() {
         )}
 
         {/* MIXING ORDER */}
-        <button
-          onClick={() => setShowMixing((v: boolean) => !v)}
-          style={{ width: "100%", padding: "13px", borderRadius: 12, border: "1px solid #222", background: showMixing ? "#161616" : "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 13, cursor: "pointer", marginBottom: showMixing ? 0 : 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}
-        >
+        <button onClick={() => setShowMixing((v: boolean) => !v)}
+          style={{ width: "100%", padding: "13px", borderRadius: 12, border: "1px solid #222", background: showMixing ? "#161616" : "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 13, cursor: "pointer", marginBottom: showMixing ? 0 : 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <span>📋 Mixing Order & Instructions</span>
           <span style={{ fontSize: 18 }}>{showMixing ? "▲" : "▼"}</span>
         </button>
@@ -719,16 +646,14 @@ export default function KushCoacher() {
                     <div style={{ fontSize: 13, color: "#ccc", marginBottom: 2 }}>{m.label}</div>
                     <div style={{ fontSize: 11, color: "#555" }}>{m.note}</div>
                     {m.tip && (
-                      <button
-                        onClick={() => setShowTip((v: boolean) => !v)}
-                        style={{ marginTop: 6, padding: "4px 10px", borderRadius: 8, border: "1px solid #2a6a2a", background: "#051505", color: "#4ade80", fontFamily: "Georgia, serif", fontSize: 11, cursor: "pointer" }}
-                      >
+                      <button onClick={() => setShowTip((v: boolean) => !v)}
+                        style={{ marginTop: 6, padding: "4px 10px", borderRadius: 8, border: "1px solid #2a6a2a", background: "#051505", color: "#4ade80", fontFamily: "Georgia, serif", fontSize: 11, cursor: "pointer" }}>
                         💡 Pro Tip
                       </button>
                     )}
                     {m.tip && showTip && (
                       <div style={{ marginTop: 8, padding: "10px 12px", background: "#0a1a0a", borderRadius: 10, border: "1px solid #2a6a2a", fontSize: 12, color: "#aaa", lineHeight: 1.6 }}>
-                        Using a battery powered drill with a paint mixer attachment works wonders when mixing powders and salts! Gets them fully dissolved much faster and more thoroughly.
+                        Using a battery powered drill with a paint mixer attachment works wonders when mixing powders and salts!
                       </div>
                     )}
                   </div>
@@ -751,10 +676,8 @@ export default function KushCoacher() {
               <input type="number" placeholder="e.g. 850" value={ppm} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPpm(e.target.value)} style={inputStyle} />
             </div>
           </div>
-          <button
-            onClick={handleLog}
-            style={{ width: "100%", padding: "13px", borderRadius: 10, background: saved ? "#1a3a1a" : phaseDark, color: saved ? "#4ade80" : phaseColor, fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: "pointer", transition: "all 0.3s", border: `1px solid ${saved ? "#4ade80" : phaseColor}` }}
-          >
+          <button onClick={handleLog}
+            style={{ width: "100%", padding: "13px", borderRadius: 10, background: saved ? "#1a3a1a" : phaseDark, color: saved ? "#4ade80" : phaseColor, fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: "pointer", transition: "all 0.3s", border: `1px solid ${saved ? "#4ade80" : phaseColor}` }}>
             {saved ? "✓ Saved to Log" : "Save to Log"}
           </button>
         </div>
@@ -762,10 +685,8 @@ export default function KushCoacher() {
         {/* LOG HISTORY */}
         {logEntries.length > 0 && (
           <>
-            <button
-              onClick={() => setShowLog((v: boolean) => !v)}
-              style={{ width: "100%", padding: "13px", borderRadius: 12, border: "1px solid #222", background: "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 13, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}
-            >
+            <button onClick={() => setShowLog((v: boolean) => !v)}
+              style={{ width: "100%", padding: "13px", borderRadius: 12, border: "1px solid #222", background: "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 13, cursor: "pointer", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <span>📓 Mix Log ({logEntries.length} {logEntries.length === 1 ? "entry" : "entries"})</span>
               <span style={{ fontSize: 18 }}>{showLog ? "▲" : "▼"}</span>
             </button>
@@ -789,15 +710,13 @@ export default function KushCoacher() {
         )}
       </div>
 
-      {/* AI ASSISTANT FLOATING BUTTON */}
-      <button
-        onClick={() => setShowAI(true)}
-        style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: "linear-gradient(135deg, #4ade80, #22c55e)", border: "none", fontSize: 26, cursor: "pointer", boxShadow: "0 4px 20px rgba(74,222,128,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}
-      >
+      {/* AI FLOATING BUTTON */}
+      <button onClick={() => setShowAI(true)}
+        style={{ position: "fixed", bottom: 24, right: 24, width: 60, height: 60, borderRadius: "50%", background: "linear-gradient(135deg, #4ade80, #22c55e)", border: "none", fontSize: 26, cursor: "pointer", boxShadow: "0 4px 20px rgba(74,222,128,0.4)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 50 }}>
         🌿
       </button>
 
-      {/* AI ASSISTANT MODAL */}
+      {/* AI MODAL */}
       {showAI && (
         <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.9)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}>
           <div style={{ background: "#0e0e0e", border: "1px solid #2a2a2a", borderRadius: "20px 20px 0 0", width: "100%", maxWidth: 580, height: "80vh", display: "flex", flexDirection: "column" }}>
@@ -806,10 +725,8 @@ export default function KushCoacher() {
                 <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase", marginBottom: 4 }}>Kush Coacher AI</div>
                 <div style={{ fontSize: 16, fontWeight: "bold", color: "#4ade80" }}>🌿 Ask the Coach</div>
               </div>
-              <button
-                onClick={() => setShowAI(false)}
-                style={{ background: "#222", border: "none", borderRadius: "50%", width: 34, height: 34, color: "#888", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
-              >×</button>
+              <button onClick={() => setShowAI(false)}
+                style={{ background: "#222", border: "none", borderRadius: "50%", width: 34, height: 34, color: "#888", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>×</button>
             </div>
             <div style={{ flex: 1, overflowY: "auto", padding: "16px 20px", display: "flex", flexDirection: "column", gap: 12 }}>
               {chatMessages.length === 0 && (
@@ -817,16 +734,9 @@ export default function KushCoacher() {
                   <div style={{ fontSize: 32, marginBottom: 12 }}>🌿</div>
                   <div style={{ fontSize: 14, color: "#666", lineHeight: 1.6 }}>Ask me anything about your grow — nutrients, pH, PPM, deficiencies, or what to look for this week.</div>
                   <div style={{ marginTop: 16, display: "flex", flexDirection: "column", gap: 8 }}>
-                    {[
-                      "My pH keeps dropping, what do I do?",
-                      "What should my plants look like in week 4 of flower?",
-                      "My PPM is too high, how do I fix it?",
-                    ].map((q: string, i: number) => (
-                      <button
-                        key={i}
-                        onClick={() => setChatInput(q)}
-                        style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #222", background: "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer", textAlign: "left" }}
-                      >
+                    {["My pH keeps dropping, what do I do?", "What should my plants look like in week 4 of flower?", "My PPM is too high, how do I fix it?"].map((q: string, i: number) => (
+                      <button key={i} onClick={() => setChatInput(q)}
+                        style={{ padding: "10px 14px", borderRadius: 10, border: "1px solid #222", background: "#111", color: "#888", fontFamily: "Georgia, serif", fontSize: 12, cursor: "pointer", textAlign: "left" }}>
                         {q}
                       </button>
                     ))}
@@ -842,26 +752,17 @@ export default function KushCoacher() {
               ))}
               {chatLoading && (
                 <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                  <div style={{ padding: "12px 14px", borderRadius: "14px 14px 14px 4px", background: "#141414", border: "1px solid #2a2a2a", color: "#555", fontSize: 13 }}>
-                    🌿 thinking...
-                  </div>
+                  <div style={{ padding: "12px 14px", borderRadius: "14px 14px 14px 4px", background: "#141414", border: "1px solid #2a2a2a", color: "#555", fontSize: 13 }}>🌿 thinking...</div>
                 </div>
               )}
             </div>
             <div style={{ padding: "12px 16px", borderTop: "1px solid #1a1a1a", display: "flex", gap: 10 }}>
-              <input
-                type="text"
-                placeholder="Ask the coach..."
-                value={chatInput}
+              <input type="text" placeholder="Ask the coach..." value={chatInput}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChatInput(e.target.value)}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { if (e.key === "Enter") sendMessage(); }}
-                style={{ flex: 1, padding: "12px 14px", borderRadius: 12, border: "1px solid #222", background: "#111", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none" }}
-              />
-              <button
-                onClick={sendMessage}
-                disabled={chatLoading || !chatInput.trim()}
-                style={{ padding: "12px 16px", borderRadius: 12, border: `1px solid ${chatLoading || !chatInput.trim() ? "#222" : "#4ade80"}`, background: chatLoading || !chatInput.trim() ? "#1a1a1a" : "#052e16", color: chatLoading || !chatInput.trim() ? "#444" : "#4ade80", fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: chatLoading || !chatInput.trim() ? "default" : "pointer" }}
-              >
+                style={{ flex: 1, padding: "12px 14px", borderRadius: 12, border: "1px solid #222", background: "#111", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none" }} />
+              <button onClick={sendMessage} disabled={chatLoading || !chatInput.trim()}
+                style={{ padding: "12px 16px", borderRadius: 12, border: `1px solid ${chatLoading || !chatInput.trim() ? "#222" : "#4ade80"}`, background: chatLoading || !chatInput.trim() ? "#1a1a1a" : "#052e16", color: chatLoading || !chatInput.trim() ? "#444" : "#4ade80", fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: chatLoading || !chatInput.trim() ? "default" : "pointer" }}>
                 Send
               </button>
             </div>
@@ -871,32 +772,22 @@ export default function KushCoacher() {
 
       {/* GROW NOTES MODAL */}
       {activeNotesKey && (
-        <div
-          onClick={(e: React.MouseEvent<HTMLDivElement>) => { if (e.target === e.currentTarget) setActiveNotesKey(null); }}
-          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}
-        >
+        <div onClick={(e: React.MouseEvent<HTMLDivElement>) => { if (e.target === e.currentTarget) setActiveNotesKey(null); }}
+          style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.85)", display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: 100 }}>
           <div style={{ background: "#141414", border: "1px solid #2a2a2a", borderRadius: "20px 20px 0 0", padding: "24px 20px 40px", width: "100%", maxWidth: 580 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
               <div>
                 <div style={{ fontSize: 10, letterSpacing: 4, color: "#555", textTransform: "uppercase", marginBottom: 4 }}>Grow Notes</div>
                 <div style={{ fontSize: 16, fontWeight: "bold", color: phaseColor }}>{activeNotesKey}</div>
               </div>
-              <button
-                onClick={() => setActiveNotesKey(null)}
-                style={{ background: "#222", border: "none", borderRadius: "50%", width: 34, height: 34, color: "#888", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}
-              >×</button>
+              <button onClick={() => setActiveNotesKey(null)}
+                style={{ background: "#222", border: "none", borderRadius: "50%", width: 34, height: 34, color: "#888", fontSize: 20, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>×</button>
             </div>
-            <textarea
-              placeholder="How are the plants looking? Any issues, observations, or things to remember this week..."
-              value={noteInput}
-              onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteInput(e.target.value)}
-              rows={6}
-              style={{ width: "100%", padding: "14px", borderRadius: 12, border: "1px solid #2a2a2a", background: "#0e0e0e", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none", resize: "none", boxSizing: "border-box", lineHeight: 1.6 }}
-            />
-            <button
-              onClick={saveNote}
-              style={{ width: "100%", marginTop: 12, padding: "14px", borderRadius: 12, border: `1px solid ${noteSaved ? "#4ade80" : phaseColor}`, background: noteSaved ? "#052e16" : phaseDark, color: noteSaved ? "#4ade80" : phaseColor, fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: "pointer", transition: "all 0.3s" }}
-            >
+            <textarea placeholder="How are the plants looking? Any issues, observations, or things to remember this week..."
+              value={noteInput} onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setNoteInput(e.target.value)} rows={6}
+              style={{ width: "100%", padding: "14px", borderRadius: 12, border: "1px solid #2a2a2a", background: "#0e0e0e", color: "#e4ddd0", fontFamily: "Georgia, serif", fontSize: 14, outline: "none", resize: "none", boxSizing: "border-box", lineHeight: 1.6 }} />
+            <button onClick={saveNote}
+              style={{ width: "100%", marginTop: 12, padding: "14px", borderRadius: 12, border: `1px solid ${noteSaved ? "#4ade80" : phaseColor}`, background: noteSaved ? "#052e16" : phaseDark, color: noteSaved ? "#4ade80" : phaseColor, fontFamily: "Georgia, serif", fontSize: 14, fontWeight: "bold", cursor: "pointer", transition: "all 0.3s" }}>
               {noteSaved ? "✓ Note Saved" : "Save Note"}
             </button>
           </div>
