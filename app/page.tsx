@@ -50,17 +50,17 @@ const SIM_DATA: Record<string, { ppmPerUnit: number; phChangePerUnit: number }> 
 
 const VEG_SCHEDULE: WeekSchedule[] = [
   {
-    week: "Veg Week 1", targetPPM: "580–680", pH: "5.7–6.4",
+    week: "Veg Week 1", targetPPM: "384–534", pH: "5.6–6.2",
     nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 0.25,  ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.25, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1,     ...SIM_DATA["Bulletproof SI"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.5,  toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
       { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,    ...SIM_DATA["Epsom Salt"] },
       { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 1.5,  ...SIM_DATA["Cal-Nit (15-0-0)"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1,  note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
     ]
   },
   {
-    week: "Veg Week 2", targetPPM: "950–1050", pH: "5.7–6.4",
+    week: "Veg Week 2", targetPPM: "600–750", pH: "4.9–5.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1,     ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.6, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -70,7 +70,7 @@ const VEG_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Veg Week 3", targetPPM: "980–1090", pH: "5.7–6.4",
+    week: "Veg Week 3", targetPPM: "612–762", pH: "5.1–5.7",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.2, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -80,7 +80,7 @@ const VEG_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Veg Week 4", targetPPM: "1100–1200", pH: "5.7–6.4",
+    week: "Veg Week 4", targetPPM: "645–795", pH: "5.6–6.2",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.75, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -94,7 +94,7 @@ const VEG_SCHEDULE: WeekSchedule[] = [
 
 const FLOWER_SCHEDULE: WeekSchedule[] = [
   {
-    week: "Flower Week 1", targetPPM: "1000–1200", pH: "5.7–6.4",
+    week: "Flower Week 1", targetPPM: "1017–1167", pH: "5.8–6.3",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -107,11 +107,11 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 2", targetPPM: "1000–1200", pH: "5.7–6.4",
+    week: "Flower Week 2", targetPPM: "1089–1239", pH: "5.4–6.0",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 2.5, ...SIM_DATA["Epsom Salt"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 3,   ...SIM_DATA["Epsom Salt"] },
       { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2.5, ...SIM_DATA["Cal-Nit (15-0-0)"] },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 10,  ...SIM_DATA["Sour-Dee"] },
@@ -120,63 +120,63 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 3", targetPPM: "1150–1350", pH: "5.7–6.4",
+    week: "Flower Week 3", targetPPM: "1122–1272", pH: "6.0–6.6",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 3.5, ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2.5, ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 4,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 3,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 2,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 10,  ...SIM_DATA["Sour-Dee"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 10,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 4", targetPPM: "1300–1550", pH: "5.7–6.4",
+    week: "Flower Week 4", targetPPM: "1122–1272", pH: "6.0–6.6",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 3.5, ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2.5, ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 4,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 3,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 2,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 10,  ...SIM_DATA["Sour-Dee"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 10,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 5", targetPPM: "1200–1450", pH: "5.7–6.4",
+    week: "Flower Week 5", targetPPM: "1170–1320", pH: "6.0–6.6",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
-      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 3.5, ...SIM_DATA["Epsom Salt"] },
-      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 1.5, ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 4,   ...SIM_DATA["Epsom Salt"] },
+      { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 3,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 2,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 15,  ...SIM_DATA["Sour-Dee"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 10,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 6", targetPPM: "1350–1550", pH: "5.7–6.4",
+    week: "Flower Week 6", targetPPM: "734–884", pH: "5.8–6.4",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
-      { name: "Epsom Salt",               defaultUnit: "g",  dose: 3.5, ...SIM_DATA["Epsom Salt"] },
+      { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
       { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 1,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 15,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10,  ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 15,  ...SIM_DATA["Sour-Dee"] },
-      { name: "Shooting Powder",          defaultUnit: "g",  dose: 2.6, ...SIM_DATA["Shooting Powder"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 20,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 7", targetPPM: "620–780", pH: "5.7–6.4",
+    week: "Flower Week 7", targetPPM: "778–928", pH: "6.1–6.7",
     nutrients: [
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2,   ...SIM_DATA["Bulletproof SI"] },
       { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
-      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 5,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
+      { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 10,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
       { name: "Sour-Dee",                 defaultUnit: "mL", dose: 20,  ...SIM_DATA["Sour-Dee"] },
       { name: "Shooting Powder",          defaultUnit: "g",  dose: 2.6, ...SIM_DATA["Shooting Powder"] },
       { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
@@ -184,22 +184,23 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 8", targetPPM: "650–800", pH: "5.7–6.4",
+    week: "Flower Week 8", targetPPM: "705–855", pH: "6.0–6.6",
     nutrients: [
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 0.75, ...SIM_DATA["Bulletproof SI"] },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
-      { name: "Sour-Dee",                 defaultUnit: "mL", dose: 20,  note: "20–30 mL/gal", ...SIM_DATA["Sour-Dee"] },
+      { name: "Sour-Dee",                 defaultUnit: "mL", dose: 25,  note: "25 mL/gal", ...SIM_DATA["Sour-Dee"] },
       { name: "Shooting Powder",          defaultUnit: "g",  dose: 5.2, ...SIM_DATA["Shooting Powder"] },
-      { name: "Great White",              defaultUnit: "tsp",dose: 0.1, note: "1 heaping tsp per 10 gal", ...SIM_DATA["Great White"] },
       { name: "Ful-Power",                defaultUnit: "mL", dose: 20,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
-    week: "Flower Week 9", targetPPM: "650–800", pH: "5.7–6.4",
+    week: "Flower Week 9", targetPPM: "751–901", pH: "5.7–6.3",
     nutrients: [
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 0.5,  ...SIM_DATA["Bulletproof SI"] },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
-      { name: "Sour-Dee",                 defaultUnit: "mL", dose: 20,  note: "20–30 mL/gal", ...SIM_DATA["Sour-Dee"] },
+      { name: "Sour-Dee",                 defaultUnit: "mL", dose: 30,  note: "30 mL/gal", ...SIM_DATA["Sour-Dee"] },
       { name: "Shooting Powder",          defaultUnit: "g",  dose: 5.2, ...SIM_DATA["Shooting Powder"] },
-      { name: "Ful-Power",                defaultUnit: "mL", dose: 20,  ...SIM_DATA["Ful-Power"] },
+      { name: "Ful-Power",                defaultUnit: "mL", dose: 30,  ...SIM_DATA["Ful-Power"] },
     ]
   },
   {
@@ -222,21 +223,21 @@ const AI_SYSTEM_PROMPT = `You are the Kush Coacher AI assistant built into the K
 CLINTON'S VERIFIED RECIPE (real tested doses):
 
 VEG PHASE (target pH 5.7-6.4):
-- Week 1: SI 2.5mL/gal, Base Nutrients 2.25g/gal, Epsom Salt 1g/gal, Cal-Nit 1.5g/gal, Great White. Target PPM 580-680
+- Week 1: SI 1mL/gal, Base Nutrients 2.5g/gal, Epsom Salt 1g/gal, Cal-Nit 1.5g/gal, Great White. Target PPM 580-680
 - Week 2: SI 1mL/gal, Base Nutrients 3.6g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Great White. Target PPM 950-1050
-- Week 3: SI 1.2mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Great White. Target PPM 980-1100
-- Week 4: SI 1.5mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2.5g/gal, Bloom 1.5mL/gal, Great White. Target PPM 1100-1200
+- Week 3: SI 1.2mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Great White. Target PPM 980-1090
+- Week 4: SI 1.75mL/gal, Base Nutrients 3.8g/gal, Epsom Salt 2g/gal, Cal-Nit 2g/gal, Bloom 1mL/gal, Great White. Target PPM 1100-1200
 
 FLOWER PHASE (target pH 5.7-6.4):
-- Week 1: SI 2.5mL, Base Nutrients 2g, Epsom Salt 2.5g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1000-1200
-- Week 2: Same as Week 1. PPM 1000-1200
-- Week 3: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1150-1350
-- Week 4: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 2.5g, Bloom 15mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1300-1550
-- Week 5: SI 2.5mL, Base Nutrients 2.8g, Epsom Salt 3.5g, Cal-Nit 1.5g, Bloom 15mL, Sour-Dee 15mL, Great White, Ful-Power 10mL. PPM 1200-1450
-- Week 6: SI 2.5mL, Base Nutrients 2g, Epsom Salt 3.5g, Cal-Nit 1g, Bloom 15mL, Sour-Dee 15mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 1350-1550
-- Week 7: Epsom Salt 1g, Bloom 5mL, Sour-Dee 20mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 620-780
-- Week 8: Bloom 1mL, Sour-Dee 20-30mL, Shooting Powder 5.2g, Great White, Ful-Power 20mL. PPM 650-800
-- Week 9: Same as Week 8 but no Great White. PPM 650-800
+- Week 1: SI 2.5mL, Base 2g, Epsom 2.5g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1000-1200
+- Week 2: SI 2.5mL, Base 2.5g, Epsom 3g, Cal-Nit 2.5g, Bloom 10mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1050-1200
+- Week 3: SI 2.5mL, Base 4.5g, Epsom 4g, Cal-Nit 3g, Bloom 2mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1100-1250
+- Week 4: SI 2.5mL, Base 4.5g, Epsom 4g, Cal-Nit 3g, Bloom 2mL, Sour-Dee 10mL, Great White, Ful-Power 10mL. PPM 1100-1250
+- Week 5: SI 2.5mL, Base 4.5g, Epsom 4g, Cal-Nit 3g, Bloom 2mL, Sour-Dee 15mL, Great White, Ful-Power 10mL. PPM 1100-1250
+- Week 6: SI 2.5mL, Base 2g, Epsom 1g, Cal-Nit 1g, Bloom 10mL, Sour-Dee 15mL, Great White, Ful-Power 20mL. PPM 950-1100
+- Week 7: SI 2mL, Epsom 1g, Bloom 10mL, Sour-Dee 20mL, Shooting Powder 2.6g, Great White, Ful-Power 20mL. PPM 800-920
+- Week 8: SI 0.75mL, Bloom 1mL, Sour-Dee 25mL, Shooting Powder 5.2g, Ful-Power 20mL. PPM 730-830
+- Week 9: SI 0.5mL, Bloom 1mL, Sour-Dee 30mL, Shooting Powder 5.2g, Ful-Power 30mL. PPM 780-870
 - Week 10: Optional flush/harvest
 
 MIXING ORDER: SI first, Base Nutrients 2nd (mix until translucent red tint — cloudy means not dissolved), Epsom Salt 3rd (sit 5 min), Cal-Nit 4th (sit 5 min), Ful-Power very last in flower.
@@ -669,11 +670,11 @@ export default function KushCoacher() {
           <div style={{ display: "flex", gap: 10, marginBottom: 12 }}>
             <div style={{ flex: 1 }}>
               <label style={{ fontSize: 11, color: "#555", display: "block", marginBottom: 5 }}>pH Reading</label>
-              <input type="number" step="0.1" placeholder="e.g. 6.0" value={ph} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPh(e.target.value)} style={inputStyle} />
+              <input type="number" step="0.1" placeholder="e.g. 6.0" value={ph || (gal > 0 ? simPH.toFixed(2) : "")} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPh(e.target.value)} style={inputStyle} />
             </div>
             <div style={{ flex: 1 }}>
               <label style={{ fontSize: 11, color: "#555", display: "block", marginBottom: 5 }}>PPM Reading</label>
-              <input type="number" placeholder="e.g. 850" value={ppm} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPpm(e.target.value)} style={inputStyle} />
+              <input type="number" placeholder="e.g. 850" value={ppm || (gal > 0 ? simPPM.toString() : "")} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPpm(e.target.value)} style={inputStyle} />
             </div>
           </div>
           <button onClick={handleLog}
