@@ -322,7 +322,7 @@ export default function KushCoacher() {
   function inPHRange(ph: number): boolean {
     const range = currentWeek.pH.split("–");
     if (range.length !== 2) return true;
-    return ph >= parseFloat(range[5.5]) && ph <= parseFloat(range[6.5]);
+    return ph >= parseFloat(range[0]) && ph <= parseFloat(range[1]);
   }
 
   function inPPMRange(ppm: number): boolean {
