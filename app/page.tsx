@@ -120,7 +120,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 3", targetPPM: "1122–1272", pH: "6.0–6.6",
+    week: "Flower Week 3", targetPPM: "1122–1272", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -133,7 +133,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 4", targetPPM: "1122–1272", pH: "6.0–6.6",
+    week: "Flower Week 4", targetPPM: "1122–1272", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -146,7 +146,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 5", targetPPM: "1170–1320", pH: "6.0–6.6",
+    week: "Flower Week 5", targetPPM: "1170–1320", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 4.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
