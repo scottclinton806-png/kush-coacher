@@ -94,7 +94,7 @@ const VEG_SCHEDULE: WeekSchedule[] = [
 
 const FLOWER_SCHEDULE: WeekSchedule[] = [
   {
-    week: "Flower Week 1", targetPPM: "1017–1167", pH: "5.8–6.3",
+    week: "Flower Week 1", targetPPM: "1017–1167", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -107,7 +107,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 2", targetPPM: "1089–1239", pH: "5.4–6.0",
+    week: "Flower Week 2", targetPPM: "1089–1239", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2.5, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -159,7 +159,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 6", targetPPM: "734–884", pH: "5.8–6.4",
+    week: "Flower Week 6", targetPPM: "734–884", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 2,   toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
@@ -172,7 +172,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 7", targetPPM: "778–928", pH: "6.1–6.7",
+    week: "Flower Week 7", targetPPM: "778–928", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 2,   ...SIM_DATA["Bulletproof SI"] },
       { name: "Epsom Salt",               defaultUnit: "g",  dose: 1,   ...SIM_DATA["Epsom Salt"] },
@@ -184,7 +184,7 @@ const FLOWER_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Flower Week 8", targetPPM: "705–855", pH: "6.0–6.6",
+    week: "Flower Week 8", targetPPM: "705–855", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 0.75, ...SIM_DATA["Bulletproof SI"] },
       { name: "Cutting Edge Bloom 0-6-5", defaultUnit: "mL", dose: 1,   ...SIM_DATA["Cutting Edge Bloom 0-6-5"] },
