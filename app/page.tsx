@@ -70,9 +70,9 @@ const VEG_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Veg Week 3", targetPPM: "612–762", pH: "5.1–5.7",
+    week: "Veg Week 3", targetPPM: "612–762", pH: "5.5–6.5",
     nutrients: [
-      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.2, ...SIM_DATA["Bulletproof SI"] },
+      { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.5, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
       { name: "Epsom Salt",               defaultUnit: "g",  dose: 2,   ...SIM_DATA["Epsom Salt"] },
       { name: "Cal-Nit (15-0-0)",        defaultUnit: "g",  dose: 2,   ...SIM_DATA["Cal-Nit (15-0-0)"] },
@@ -80,7 +80,7 @@ const VEG_SCHEDULE: WeekSchedule[] = [
     ]
   },
   {
-    week: "Veg Week 4", targetPPM: "645–795", pH: "5.6–6.2",
+    week: "Veg Week 4", targetPPM: "645–795", pH: "5.5–6.5",
     nutrients: [
       { name: "Bulletproof SI",           defaultUnit: "mL", dose: 1.75, ...SIM_DATA["Bulletproof SI"] },
       { name: "Base Nutrients (5-12-26)", defaultUnit: "g",  dose: 3.8, toggleable: true, ...SIM_DATA["Base Nutrients (5-12-26)"] },
