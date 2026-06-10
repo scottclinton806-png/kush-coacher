@@ -23,6 +23,3 @@ workflows:
             archive -archivePath build/App.xcarchive
     artifacts:
       - build/App.xcarchive
-    publishing:
-      app_store_connect:
-        auth: integration
