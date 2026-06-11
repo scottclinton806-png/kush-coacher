@@ -24,7 +24,7 @@ workflows:
             -sdk iphoneos \
             -configuration Release \
             archive -archivePath build/App.xcarchive
-      -name: Build IPA
+      - name: Build IPA
         script: |
           xcode-project build-ipa
     artifacts:
