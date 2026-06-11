@@ -19,7 +19,7 @@ workflows:
         script: xcode-project use-profiles
       - name: Build iOS
         script: |
-          xcodebuild -workspace ios/App/App.xcworkspace \
+          xcodebuild -workspace ios/App/App.xcodeproj/project.xcworkspace \
             -scheme App \
             -sdk iphoneos \
             -configuration Release \
