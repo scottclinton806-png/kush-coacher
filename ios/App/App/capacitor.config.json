@@ -1,0 +1,10 @@
+{
+	"appId": "com.kushcoacher.app",
+	"appName": "Kush Coacher",
+	"webDir": "out",
+	"server": {
+		"url": "https://www.kushcoacher.com",
+		"cleartext": false
+	},
+	"packageClassList": []
+}
