@@ -26,4 +26,4 @@ workflows:
             archive -archivePath build/App.xcarchive
     artifacts:
       - build/App.xcarchive
-git add . && git commit -m "Add build" && git push
+
