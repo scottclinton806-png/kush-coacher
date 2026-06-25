@@ -15,6 +15,10 @@ workflows:
         script: npx cap add ios || true
       - name: Capacitor sync
         script: npx cap sync ios
+      - name: Bump build number
+                script: |
+                  cd ios/App
+                  agvtool new-version -all 2
       - name: Set up code signing
         script: xcode-project use-profiles
       - name: Build iOS
