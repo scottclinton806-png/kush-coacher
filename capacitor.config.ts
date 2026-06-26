@@ -1,8 +1,11 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.kushcoacher.app',
+  appId: 'com.mushluvv.kushcoacher',
   appName: 'Kush Coacher',
+  ios: {
+    buildNumber: '3',
+  }
   webDir: 'out',
   server: {
     url: 'https://www.kushcoacher.com',
