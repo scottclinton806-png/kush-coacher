@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const { message } = await request.json();
+  const body = await request.json();
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -10,13 +10,9 @@ export async function POST(request: Request) {
       'x-api-key': process.env.ANTHROPIC_API_KEY!,
       'anthropic-version': '2023-06-01',
     },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 1024,
-      messages: [{ role: 'user', content: message }],
-    }),
+    body: JSON.stringify(body),
   });
 
   const data = await response.json();
-  return NextResponse.json({ reply: data.content[0].text });
+  return NextResponse.json(data);
 }
