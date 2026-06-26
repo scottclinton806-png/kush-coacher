@@ -413,7 +413,7 @@ export default function KushCoacher() {
     setChatLoading(true);
     try {
       const messages = [...chatMessages, { role: "user" as const, content: userMessage }];
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
