@@ -8,6 +8,8 @@ workflows:
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.mushluvv.kushcoacher
+      vars:
+        CAPACITOR_BUILD: "true"
     scripts:
       - name: Install dependencies
         script: npm install
@@ -16,7 +18,7 @@ workflows:
       - name: Capacitor sync
         script: npx cap sync ios
       - name: Bump build number
-        script: cd ios/App && agvtool new-version -all 4
+        script: cd ios/App && agvtool new-version -all 5
       - name: Set up code signing
         script: xcode-project use-profiles
       - name: Build iOS
