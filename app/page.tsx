@@ -417,7 +417,7 @@ export default function KushCoacher() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
+          model: "claude-sonnet-4-5",
           max_tokens: 1000,
           system: AI_SYSTEM_PROMPT,
           messages: messages.map((m: ChatMessage) => ({ role: m.role, content: m.content })),
